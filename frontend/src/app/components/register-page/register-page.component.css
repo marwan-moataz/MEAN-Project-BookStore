@@ -1,0 +1,102 @@
+body {
+  background-image: url("https://www.creativefabrica.com/wp-content/uploads/2023/04/13/Bookmark-flying-out-of-an-open-book-Graphics-67077756-1.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: "Numans", sans-serif;
+  background-position: center;
+}
+
+.registration-form {
+  padding: 50px 0;
+}
+
+.title {
+  color: gold;
+  font-size: 2rem;
+  border: 1px solid gold;
+  border-radius: 50px;
+}
+
+.registration-form form {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: blur(4px);
+  max-width: 600px;
+  margin: auto;
+  padding: 50px 70px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+}
+
+input {
+  background-color: black;
+  border: none;
+  border-bottom: 1px solid gold;
+  color: gold;
+}
+
+input[type="text"]::-webkit-input-placeholder,
+input[type="password"]::-webkit-input-placeholder,
+input[type="email"]::-webkit-input-placeholder {
+  color: gold;
+}
+
+input:focus {
+  box-shadow: 0px 2px 10px gold;
+  background-color: black;
+  color: gold;
+}
+
+.registration-form .form-icon {
+  text-align: center;
+  background-color: transparent;
+  border: 2px solid gold;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  color: gold;
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  margin-bottom: 50px;
+  line-height: 100px;
+}
+
+.registration-form .item {
+  border-radius: 20px;
+  margin-bottom: 25px;
+  padding: 10px 20px;
+}
+
+.registration-form .create-account {
+  border-radius: 30px;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: transparent;
+  border: 1px solid gold;
+  color: gold;
+  margin-top: 20px;
+}
+
+.registration-form .create-account:hover {
+  background-color: gold;
+  color: black;
+}
+
+.registration-form .social-icons {
+  margin-top: 30px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 576px) {
+  .registration-form form {
+    padding: 50px 20px;
+  }
+
+  .registration-form .form-icon {
+    width: 70px;
+    height: 70px;
+    font-size: 0.6rem;
+    line-height: 70px;
+  }
+}

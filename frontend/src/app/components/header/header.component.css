@@ -1,0 +1,43 @@
+.navbar {
+  background-color: black !important;
+  color: gold;
+}
+
+a {
+  color: gold !important;
+}
+
+.login {
+  border: 1px solid gold;
+  color: gold;
+}
+
+.login:hover {
+  background-color: gold;
+  color: black;
+}
+
+.signup {
+  background-color: gold;
+  color: black;
+  transition: 0.3s;
+}
+
+.signup:hover {
+  background-color: black;
+  border: 1px solid gold;
+  color: gold;
+}
+
+.fa-bars {
+  color: gold !important;
+}
+
+.username {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+  border: 1px solid gold;
+  padding: 0.5rem;
+  border-radius: 3px;
+}
