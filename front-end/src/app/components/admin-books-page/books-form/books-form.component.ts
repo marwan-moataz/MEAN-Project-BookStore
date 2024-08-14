@@ -27,9 +27,9 @@ export class BooksFormComponent {
   constructor(private bookService: BookService) {}
 
   ngOnInit(): void {
-    this.bookName.setValue(this.book.name);
-    this.bookAuthor.setValue(this.book.author);
-    this.bookCategory.setValue(this.book.category);
+    this.bookName.setValue(this.book.name!);
+    this.bookAuthor.setValue(this.book.author!);
+    this.bookCategory.setValue(this.book.category!);
   }
 
   insertBook(book: any): void {

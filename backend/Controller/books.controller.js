@@ -27,10 +27,11 @@ const getAllBooks = async (req, res) => {
     const skip = (page - 1) * limit;
 
     const books = await Books.find().limit(limit).skip(skip);
+    const booksCount = await Books.countDocuments();
     if (books.length) {
       res.json({
         status: "success",
-        data: { books },
+        data: { books, booksCount },
       });
     } else {
       res.json({ status: "fail", data: { books }, message: "no books found" });
