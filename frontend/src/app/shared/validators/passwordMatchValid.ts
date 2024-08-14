@@ -1,8 +1,8 @@
 import { AbstractControl } from '@angular/forms';
 
 export const PasswordMatchValidator = (
-  PasswordControlName: string,
-  confirmPasswordControlName: string
+  PasswordControlName: any,
+  confirmPasswordControlName: any
 ) => {
   const validator = (form: AbstractControl) => {
     const passwordControl = form.get(PasswordControlName);

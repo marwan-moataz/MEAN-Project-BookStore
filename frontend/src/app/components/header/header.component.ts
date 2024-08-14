@@ -23,6 +23,7 @@ export class HeaderComponent {
 
   logOut() {
     this.userService.logOut();
+    confirm('Are You sure you want to logout ?');
   }
 
   get isAuth() {

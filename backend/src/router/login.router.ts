@@ -1,10 +1,12 @@
 import { Router } from "express";
 import { User } from "../models/user.model";
 import jwt from "jsonwebtoken";
-import { UserModel } from "../models/user.model";
+import { UserModel, userBook } from "../models/user.model";
 import bcrypt from "bcrypt";
+import multer from "multer";
 
 const router = Router();
+
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
   const user = await UserModel.findOne({ email });
@@ -16,18 +18,39 @@ router.post("/login", async (req, res) => {
   const isPasswordValid = await bcrypt.compare(password, user.password);
 
   if (isPasswordValid) {
-    res.send(generateTokenResponse(user));
+    const userData = {
+      email: user.email,
+      id: user.id,
+      name: user.name,
+      book: user.book,
+      profilePicture: user.profilePicture,
+      token: generateTokenResponse(user),
+    };
+    res.send(generateTokenResponse(userData));
   } else {
     res.status(401).json({ message: "Invalid credentials" });
   }
 });
 
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     console.log("multer");
+//     cb(null, "./uploads/profile_pictures");
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, `${new Date()}-file.originalname`);
+//     console.log("hello joo");
+//   },
+// });
+
+// const upload = multer({ storage });
+
 router.post("/register", async (req, res) => {
-  const { name, email, password, address } = req.body;
+  const { name, email, password, profilePicture } = req.body;
   const user = await UserModel.findOne({ email });
 
   if (user) {
-    res.status(400).send("user is already exist, please login");
+    res.status(400).json({ message: "user is already exist, please login" });
     return;
   }
   const encryptedPassword = await bcrypt.hash(password, 10);
@@ -37,8 +60,15 @@ router.post("/register", async (req, res) => {
     name,
     email: email.toLowerCase(),
     password: encryptedPassword,
-    address,
+    confirmPassword: encryptedPassword,
+    profilePicture,
     isAdmin: false,
+    book: {
+      bookId: "",
+      shelve: null,
+      rating: 0,
+      comment: "",
+    } as userBook,
   };
   const dbUser = await UserModel.create(newUser);
   res.send(generateTokenResponse(dbUser));

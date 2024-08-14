@@ -5,8 +5,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { UserServicesService } from '../../services/user.services.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { AdminService } from '../../services/admin.service';
 
 @Component({
   selector: 'app-admin-login',
@@ -21,7 +21,7 @@ export class AdminLoginComponent {
   returnUrl = '';
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserServicesService,
+    private adminService: AdminService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {}
@@ -42,7 +42,7 @@ export class AdminLoginComponent {
     this.isSubmitted = true;
     if (this.adminLoginForm.invalid) return;
 
-    this.userService
+    this.adminService
       .login({
         email: this.fc['email'].value,
         password: this.fc['password'].value,

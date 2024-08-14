@@ -1,8 +1,10 @@
 export class User {
+  [x: string]: any;
   id!: string;
   email!: string;
   name!: string;
-  address!: string;
   token!: string;
   isAdmin!: boolean;
+  profilePicture!: string;
+  book!: any;
 }

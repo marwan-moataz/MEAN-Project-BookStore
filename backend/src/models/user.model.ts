@@ -1,21 +1,31 @@
 import { Schema, model } from "mongoose";
 
+export interface userBook {
+  bookId: string;
+  shelve: "read" | "want to read" | "reading" | null;
+  rating: number;
+  comment: string;
+}
 export interface User {
   id: string;
   email: string;
-  password: string;
+  password: any;
+  confirmPassword: string;
   name: string;
-  address: string;
+  profilePicture: string;
   isAdmin: boolean;
+  book: userBook;
 }
 
 export const UserSchema = new Schema<User>(
   {
     name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    address: { type: String, required: true },
+    email: { type: String, Number, required: true, unique: true },
+    password: { type: String, Number, required: true },
+    confirmPassword: { type: String, required: true },
     isAdmin: { type: Boolean, required: true },
+    profilePicture: { type: String, required: true },
+    book: { type: Array },
   },
   {
     timestamps: true,

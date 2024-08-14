@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { USER_LOGIN_URL } from '../shared/constants/urls';
 import { IUserLogin } from '../shared/interfaces/IUserLogin';
 import { User } from '../shared/models/User';
 import { IUserRegister } from '../shared/interfaces/IUserRegister';
@@ -31,18 +30,22 @@ export class UserServicesService {
         next: (user) => {
           this.setUserToLocalStorage(user);
           this.userSubject.next(user);
-          this.toastrService.success('Login Successful', user.name);
+          this.toastrService.success('Login Successful', user.name, {
+            positionClass: 'toast-bottom-right',
+          });
         },
         error: (errorResponse) => {
-          this.toastrService.error(errorResponse.error, 'Sorry');
+          this.toastrService.error('Invalid Email or Password', 'Try again', {
+            positionClass: 'toast-bottom-right',
+          });
         },
       })
     );
   }
 
-  register(userRegister: IUserRegister): Observable<User> {
+  register(formData: IUserRegister): Observable<User> {
     return this.http
-      .post<User>('http://localhost:4000/register', userRegister)
+      .post<User>('http://localhost:4000/register', formData)
       .pipe(
         tap({
           next: (user) => {
@@ -50,11 +53,16 @@ export class UserServicesService {
             this.userSubject.next(user);
             this.toastrService.success(
               `welcome to the bookstore ${user.name}`,
-              'Register Successful'
+              'Register Successful',
+              { positionClass: 'toast-bottom-right' }
             );
           },
           error: (errorResponse) => {
-            this.toastrService.error(errorResponse.error, 'Register Failed');
+            this.toastrService.error(
+              errorResponse.error.message,
+              'Register Failed',
+              { positionClass: 'toast-bottom-right' }
+            );
           },
         })
       );
@@ -63,11 +71,17 @@ export class UserServicesService {
   logOut() {
     this.userSubject.next(new User());
     localStorage.removeItem(USER_KEY);
-    window.location.reload();
   }
 
   private setUserToLocalStorage(user: User) {
-    localStorage.setItem(USER_KEY, JSON.stringify(user));
+    const userData = {
+      email: user.email,
+      id: user.id,
+      name: user.name,
+      token: user.token,
+      book: user.book,
+    };
+    localStorage.setItem(USER_KEY, JSON.stringify(userData));
   }
 
   private getUserFromLocalStorage(): User {

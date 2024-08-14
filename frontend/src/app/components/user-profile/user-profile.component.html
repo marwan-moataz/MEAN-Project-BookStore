@@ -1,0 +1,37 @@
+<table class="table border border-2 rounded-5 align-middle">
+  <thead class="table-light">
+    <tr>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <th scope="row"></th>
+      <td>
+        <img
+          style="max-height: 200px; max-width: 100px"
+          [src]=""
+          alt="book image"
+        />
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>
+        <div class="d-flex gap-4 flex-column align-items-center">
+          <button
+            class="actionBtn btn fs-2"
+            data-bs-toggle="modal"
+            [attr.data-bs-target]="'#formModal'"
+          >
+            <i class="bx bxs-pencil"></i>
+          </button>
+          <button class="actionBtn btn fs-2" data-bs-toggle="modal">
+            <i class="bx bxs-trash-alt"></i>
+          </button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
