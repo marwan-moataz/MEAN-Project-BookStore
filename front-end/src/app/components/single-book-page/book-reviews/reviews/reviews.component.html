@@ -1,0 +1,22 @@
+@for (rev of custReviews; track $index) {
+
+<div class="reviews">
+  <div class="reviewer">
+    <h2 class="reviewerName">{{ rev.reviewerName }}</h2>
+    <div class="rating">
+      @for (item of [5,4,3,2,1]; track $index) {
+      <input
+        value="{{ item }}"
+        name="{{ rev.comment }}"
+        id="star{{ item }}{{ rev.comment }}"
+        type="radio"
+        disabled
+        [attr.checked]="rev.rating == item ? 'checked' : null"
+      />
+      <label for="star5_${item.comment}"></label>
+      }
+    </div>
+  </div>
+  <p class="comment">{{ rev.comment }}</p>
+</div>
+}

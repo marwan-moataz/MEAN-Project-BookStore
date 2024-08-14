@@ -65,5 +65,6 @@ export class BooksFormComponent {
     } else if (this.formActionType === 'Delete') {
       this.deleteBook(this.book._id);
     }
+    location.reload();
   }
 }

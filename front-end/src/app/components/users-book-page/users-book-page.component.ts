@@ -3,11 +3,12 @@ import { SingleBookCardComponent } from './single-book-card/single-book-card.com
 import { Book } from '../../models/book.model';
 import { BookService } from '../../services/book.service';
 import { CommonModule } from '@angular/common';
+import { PaginationComponent } from '../../shared/pagination/pagination.component';
 
 @Component({
   selector: 'app-users-book-page',
   standalone: true,
-  imports: [SingleBookCardComponent, CommonModule],
+  imports: [SingleBookCardComponent, CommonModule, PaginationComponent],
   templateUrl: './users-book-page.component.html',
   styleUrl: './users-book-page.component.css',
 })
@@ -27,10 +28,20 @@ export class UsersBookPageComponent {
       .getBooks(this.currentPage, this.pageSize)
       .subscribe((data: any) => {
         this.books = data.data.books;
-        this.booksCount = data.data.booksCount;
+        this.booksCount == 0 ? (this.booksCount = data.data.booksCount) : '';
       });
     this.moreBooks =
       this.pageSize * (this.currentPage - 1) + this.books.length <=
-      this.booksCount;
+      this.booksCount + 1;
   }
+
+  nextBtnOnclick = () => {
+    this.currentPage++;
+    this.getBooks();
+  };
+
+  previousBtnOnclick = () => {
+    this.currentPage--;
+    this.getBooks();
+  };
 }

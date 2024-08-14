@@ -1,0 +1,113 @@
+.rating {
+  display: inline-block;
+}
+
+.rating input {
+  display: none;
+}
+
+.rating label {
+  float: right;
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.3s;
+}
+
+.rating label:before {
+  content: "\2605";
+  font-size: 30px;
+}
+
+.rating input:checked ~ label,
+.rating label:hover,
+.rating label:hover ~ label {
+  color: #6f00ff;
+  transition: color 0.3s;
+}
+
+.rating input:disabled ~ label {
+  cursor: default;
+  color: #ccc;
+}
+
+.rating input:disabled:checked ~ label {
+  cursor: default;
+  color: #6f00ff;
+}
+
+/*New Review*/
+
+.newReview {
+  display: flex;
+  flex-direction: column;
+  gap: 3vh;
+}
+
+.newReviewHeading h2,
+.newReviewHeading h3 {
+  font-family: "poppins";
+  font-weight: 500;
+}
+.newReviewHeading h3 {
+  font-size: medium;
+  font-family: "poppins";
+  font-weight: 300;
+}
+
+.newRating {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.newReview form {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 3vh;
+}
+
+.newReview form h3 {
+  font-family: "poppins";
+  font-weight: 500;
+}
+.newReview form input,
+.newReview form textarea {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 7px;
+  padding: 10px;
+  outline: none;
+}
+.newReview form input {
+  width: 85%;
+}
+.newReview form textarea {
+  width: 95%;
+  resize: vertical;
+}
+.reviewerData {
+  display: flex;
+  gap: 3vw;
+}
+
+.reviewerName,
+.reviewerEmail {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.newReview form .submitBtn {
+  background-color: black;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  letter-spacing: 0.5px;
+  border-radius: 30px;
+  padding: 12px 35px;
+  color: #fff;
+  transition: all 0.2s ease-in-out;
+}
+.newReview form .submitBtn:hover {
+  background-color: #717fe0;
+}

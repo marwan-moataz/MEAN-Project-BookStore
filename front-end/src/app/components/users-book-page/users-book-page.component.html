@@ -8,36 +8,17 @@
       [author]="item.author!"
       [title]="item.name!"
     ></app-single-book-card>
+    }@empty {
+    <h1 class="d-block mx-auto display-3 mt-5 text-danger">Empty Shelfs</h1>
     }
   </div>
 
-  <nav aria-label="Page navigation">
-    <ul class="pagination justify-content-center">
-      <li class="page-item">
-        <button
-          class="page-link"
-          [disabled]="currentPage === 1"
-          (click)="currentPage = currentPage - 1; getBooks()"
-        >
-          Previous
-        </button>
-      </li>
-      <li class="page-item">
-        <span class="page-link">
-          {{ currentPage }}
-        </span>
-      </li>
-      <li class="page-item">
-        <button
-          class="page-link"
-          [disabled]="!moreBooks"
-          (click)="currentPage = currentPage + 1; getBooks()"
-        >
-          Next
-        </button>
-      </li>
-    </ul>
-  </nav>
+  <app-pagination
+    [nextIsEnabled]="moreBooks"
+    [currentPage]="currentPage"
+    [nextBtnHandler]="nextBtnOnclick"
+    [previousBtnHandler]="previousBtnOnclick"
+  ></app-pagination>
   }@else {
   <h1 class="d-block mx-auto display-3 mt-5 text-danger">
     The Store is Under Maintenance
