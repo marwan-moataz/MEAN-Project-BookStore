@@ -44,12 +44,16 @@
               aria-label="Default select example"
               [formControl]="bookCategory"
             >
-              <option selected>
+              <option
+                selected
+                [hidden]="!book.category"
+                [value]="book.category || 'Select Category'"
+              >
                 {{ book.category || "Select Category" }}
               </option>
-              <option value="Category">One</option>
-              <option value="Category">Two</option>
-              <option value="Category">Three</option>
+              @for (item of categoryList; track $index) {
+              <option value="{{ item }}">{{ item }}</option>
+              }
             </select>
           </div>
           <div>
@@ -61,10 +65,16 @@
               aria-label="Default select example"
               [formControl]="bookAuthor"
             >
-              <option selected>{{ book.author || "Select Author" }}</option>
-              <option value="Author">One</option>
-              <option value="Author">Two</option>
-              <option value="Author">Three</option>
+              <option
+                selected
+                [hidden]="!book.author"
+                [value]="book.author || 'Select Author'"
+              >
+                {{ book.author || "Select Author" }}
+              </option>
+              @for (item of authorList; track $index) {
+              <option value="{{ item }}">{{ item }}</option>
+              }
             </select>
           </div>
           <div>

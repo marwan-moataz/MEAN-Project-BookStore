@@ -17,6 +17,6 @@
       }
     </div>
   </div>
-  <p class="comment">{{ rev.comment }}</p>
+  <p class="comment" *ngIf="rev.comment">{{ rev.comment }}</p>
 </div>
 }

@@ -7,6 +7,7 @@ import { PaginationComponent } from '../../shared/pagination/pagination.componen
 import { AdminTableComponent } from '../../shared/admin-table/admin-table.component';
 import { TableData } from '../../models/tableData.model';
 import { BookDetailsComponent } from '../single-book-page/book-details/book-details.component';
+import { AdminNavigationComponent } from '../../shared/admin-navigation/admin-navigation.component';
 
 @Component({
   selector: 'app-admin-books-page',
@@ -17,6 +18,7 @@ import { BookDetailsComponent } from '../single-book-page/book-details/book-deta
     PaginationComponent,
     AdminTableComponent,
     BookDetailsComponent,
+    AdminNavigationComponent,
   ],
   templateUrl: './admin-books-page.component.html',
   styleUrl: './admin-books-page.component.css',

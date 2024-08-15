@@ -15,6 +15,7 @@
         <img
           style="max-height: 200px; max-width: 100px"
           [src]="item.photo"
+          (error)="setDefaultImage($event)"
           alt="book image"
         />
       </td>

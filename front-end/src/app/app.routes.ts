@@ -5,6 +5,8 @@ import { SingleBookPageComponent } from './components/single-book-page/single-bo
 
 export const routes: Routes = [
   { path: 'admin/books', component: AdminBooksPageComponent },
+  { path: 'admin/categories', component: UsersBookPageComponent },
+  { path: 'admin/author', component: SingleBookPageComponent },
   { path: 'books', component: UsersBookPageComponent },
   {
     path: 'books/:id',

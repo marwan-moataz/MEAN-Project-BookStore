@@ -20,6 +20,52 @@ export class BooksFormComponent {
     photo: '',
   };
   @Input() formActionType: string = 'Add';
+  categoryList: string[] = [
+    'Fiction',
+    'Non-Fiction',
+    'Mystery',
+    'Science Fiction',
+    'Fantasy',
+    'Historical',
+    'Romance',
+    'Thriller',
+    'Biography',
+    'Self-Help',
+    'Young Adult',
+    "Children's",
+    'Horror',
+    'Poetry',
+    'Graphic Novels',
+    'Classics',
+    'Philosophy',
+    'Science',
+    'Travel',
+    'Cookbooks',
+  ];
+
+  authorList: string[] = [
+    'J.K. Rowling',
+    'George R.R. Martin',
+    'J.R.R. Tolkien',
+    'Agatha Christie',
+    'Stephen King',
+    'Jane Austen',
+    'Mark Twain',
+    'Ernest Hemingway',
+    'F. Scott Fitzgerald',
+    'Harper Lee',
+    'Charles Dickens',
+    'Isaac Asimov',
+    'Arthur Conan Doyle',
+    'Leo Tolstoy',
+    'Gabriel Garcia Marquez',
+    'Virginia Woolf',
+    'Franz Kafka',
+    'Fyodor Dostoevsky',
+    'H.G. Wells',
+    'James Joyce',
+  ];
+
   bookName = new FormControl('');
   bookAuthor = new FormControl('');
   bookCategory = new FormControl('');
@@ -28,8 +74,8 @@ export class BooksFormComponent {
 
   ngOnInit(): void {
     this.bookName.setValue(this.book.name!);
-    this.bookAuthor.setValue(this.book.author!);
-    this.bookCategory.setValue(this.book.category!);
+    this.bookAuthor.setValue(this.book.author! || 'Select Author');
+    this.bookCategory.setValue(this.book.category! || 'Select Category');
     this.bookPhoto.setValue(this.book.photo!);
   }
 

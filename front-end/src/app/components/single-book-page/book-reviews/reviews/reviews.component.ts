@@ -1,9 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-reviews',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './reviews.component.html',
   styleUrl: './reviews.component.css',
 })

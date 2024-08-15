@@ -1,5 +1,5 @@
 <div class="book-cards">
-  <div class="book-card">
+  <div class="book-card p-2">
     <div class="content-wrapper">
       <img [src]="bookData.photo" alt="" class="book-card-img" />
       <div class="card-content">
@@ -37,5 +37,15 @@
         </div>
       </div>
     </div>
+    <select
+      class="form-select my-3 mx-auto w-75 border border-primary"
+      aria-label="Default select example"
+      [formControl]="bookStatus"
+    >
+      <option value="null" hidden selected>Choose Your Book Status</option>
+      <option value="want to read" selected>Want to read</option>
+      <option value="reading" selected>Currently Reading</option>
+      <option value="read" selected>Finished Reading</option>
+    </select>
   </div>
 </div>

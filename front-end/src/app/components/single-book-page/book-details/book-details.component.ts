@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { Book } from '../../../models/book.model';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-book-details',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './book-details.component.html',
   styleUrl: './book-details.component.css',
 })
@@ -17,4 +18,5 @@ export class BookDetailsComponent {
     author: 'Richard Russo',
     averageRating: 4,
   };
+  bookStatus = new FormControl<string | null>(null);
 }
