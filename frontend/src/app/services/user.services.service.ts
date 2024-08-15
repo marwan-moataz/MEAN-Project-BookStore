@@ -42,6 +42,15 @@ export class UserServicesService {
       })
     );
   }
+  updateBookStatus(bookId: string, newStatus: string): Observable<any> {
+    return this.http.patch(`http://localhost:4000/books/${bookId}/status`, {
+      shelve: newStatus,
+    });
+  }
+
+  getBooksByShelve(shelve: string): Observable<any> {
+    return this.http.get(`http://localhost:4000/books?shelve=${shelve}`);
+  }
 
   register(formData: IUserRegister): Observable<User> {
     return this.http

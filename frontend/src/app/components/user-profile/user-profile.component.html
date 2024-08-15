@@ -1,37 +1,31 @@
-<table class="table border border-2 rounded-5 align-middle">
-  <thead class="table-light">
+<table>
+  <thead>
     <tr>
-      <th scope="col"></th>
+      <th>Cover</th>
+      <th>Name</th>
+      <th>Author</th>
+      <th>avgRate</th>
+      <th>Rating</th>
+      <th>Shelve</th>
     </tr>
   </thead>
-
-  <tbody>
-    <tr>
-      <th scope="row"></th>
-      <td>
-        <img
-          style="max-height: 200px; max-width: 100px"
-          [src]=""
-          alt="book image"
-        />
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>
-        <div class="d-flex gap-4 flex-column align-items-center">
-          <button
-            class="actionBtn btn fs-2"
-            data-bs-toggle="modal"
-            [attr.data-bs-target]="'#formModal'"
-          >
-            <i class="bx bxs-pencil"></i>
-          </button>
-          <button class="actionBtn btn fs-2" data-bs-toggle="modal">
-            <i class="bx bxs-trash-alt"></i>
-          </button>
-        </div>
-      </td>
+  <tbody formArrayName="books">
+    <tr *ngFor="let book of books.controls; let i = index">
+      <ng-container [formGroupName]="i">
+        <td><img [src]="book.value.cover" alt="{{ book.value.name }}" /></td>
+        <td>{{ book.value.name }}</td>
+        <td>{{ book.value.author }}</td>
+        <td>{{ book.value.avgRate }}</td>
+        <td>{{ book.value.rating }}</td>
+        <td>
+          <select formControlName="shelve" (change)="updateBookStatus(i)">
+            <option value="read">Read</option>
+            <option value="want to read">Want to Read</option>
+            <option value="reading">Reading</option>
+            <option value="">None</option>
+          </select>
+        </td>
+      </ng-container>
     </tr>
   </tbody>
 </table>

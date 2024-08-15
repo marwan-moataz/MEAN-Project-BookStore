@@ -4,7 +4,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
-import userRouter from "./router/login.router";
+import userRouter from "./router/routes";
 import adminrouter from "./router/admin.router";
 
 const app = express();

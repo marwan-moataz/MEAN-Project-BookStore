@@ -29,22 +29,13 @@ body {
 }
 
 input {
-  background-color: black;
+  background-color: white;
   border: none;
   border: 1px solid gold;
-  color: gold;
-}
-
-input[type="text"]::-webkit-input-placeholder,
-input[type="password"]::-webkit-input-placeholder,
-input[type="email"]::-webkit-input-placeholder {
-  color: gold;
 }
 
 input:focus {
   box-shadow: -10px 2px 50px gold;
-  background-color: black;
-  color: gold;
 }
 
 .registration-form .form-icon {

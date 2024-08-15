@@ -33,7 +33,7 @@
         <button *ngIf="!user.email" class="btn login ms-3" routerLink="/login">
           Login
         </button>
-        <div class="username" *ngIf="user.email">
+        <div class="username" *ngIf="user.email" routerLink="/userProfile">
           {{ user.name }}
           <div class="profile-picture">
             <img [src]="user.profilePicture" alt="pp" />
