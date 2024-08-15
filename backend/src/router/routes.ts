@@ -9,7 +9,7 @@ router.post("/register", controller.registerController);
 
 router.get("/books/:bookId", controller.getBook);
 
-router.patch("/books/:bookId/status", controller.bookStatusController);
+router.patch("/books/:userId/status", controller.bookStatusController);
 
 export default router;
 // const storage = multer.diskStorage({

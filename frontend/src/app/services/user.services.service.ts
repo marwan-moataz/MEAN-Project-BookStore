@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { IUserLogin } from '../shared/interfaces/IUserLogin';
 import { User } from '../shared/models/User';
 import { IUserRegister } from '../shared/interfaces/IUserRegister';
+import { Book } from '../shared/models/book.model';
 
 const USER_KEY = 'User';
 
@@ -42,14 +43,27 @@ export class UserServicesService {
       })
     );
   }
-  updateBookStatus(bookId: string, newStatus: string): Observable<any> {
-    return this.http.patch(`http://localhost:4000/books/${bookId}/status`, {
+  // updateBookStatus(bookId: string, newStatus: string): Observable<any> {
+  //   return this.http.patch(`http://localhost:4000/books/${bookId}/status`, {
+  //     shelve: newStatus,
+  //   });
+  // }
+  updateBookStatus(
+    bookId: string,
+    newStatus: string,
+    userId: string
+  ): Observable<any> {
+    return this.http.patch(`http://localhost:4000/books/${userId}/status`, {
       shelve: newStatus,
+      bookId,
     });
   }
 
   getBooksByShelve(shelve: string): Observable<any> {
     return this.http.get(`http://localhost:4000/books?shelve=${shelve}`);
+  }
+  getSingleBooks(bookId: string): Observable<Book[]> {
+    return this.http.get<Book[]>('http://localhost:4000/books/' + bookId);
   }
 
   register(formData: IUserRegister): Observable<User> {
@@ -85,12 +99,14 @@ export class UserServicesService {
   private setUserToLocalStorage(user: User) {
     const userData = {
       email: user.email,
-      id: user.id,
+      userId: user.id,
       name: user.name,
       token: user.token,
       book: user.book,
+      profilePicture: user.profilePicture,
     };
     localStorage.setItem(USER_KEY, JSON.stringify(userData));
+    localStorage.setItem('userId', userData.userId);
   }
 
   private getUserFromLocalStorage(): User {

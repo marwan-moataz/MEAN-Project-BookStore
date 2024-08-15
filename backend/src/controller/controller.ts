@@ -3,8 +3,8 @@ import { UserModel } from "../models/user.model";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { User, userBook } from "../models/user.model";
-import { Books } from "../models/books.model";
 import { AdminModel } from "../models/adminUser";
+import { Books } from "../models/books.model";
 
 const loginController = async (req: Request, res: Response) => {
   const { email, password } = req.body;
@@ -64,34 +64,81 @@ const registerController = async (req: Request, res: Response) => {
     confirmPassword: encryptedPassword,
     profilePicture,
     isAdmin: false,
-    book: {
-      bookId: "",
-      shelve: null,
-      rating: 0,
-      comment: "",
-    } as userBook,
+    book: [
+      {
+        bookId: "",
+        shelve: null,
+        rating: 0,
+        comment: "",
+      },
+    ] as userBook[],
   };
   const dbUser = await UserModel.create(newUser);
   res.send(generateTokenResponse(dbUser));
 };
 
+// const bookStatusController = async (req: Request, res: Response) => {
+//   const { userId } = req.params;
+//   const { shelve, bookId } = req.body;
+
+//   try {
+//     let user = await UserModel.findById(userId);
+//     if (!user) {
+//       return res
+//         .status(404)
+//         .json({ status: "fail", message: "Book not found" });
+//     }
+//     console.log(user);
+
+//     const bookArr = user.book.find((item: any) => {
+//       item.bookId === bookId;
+//     });
+//     console.log(bookArr);
+
+//     user.book = bookArr;
+//     await user.save();
+
+//     res.json({ status: "success", data: user });
+//   } catch (err) {
+//     console.log(err);
+//     res
+//       .status(500)
+//       .json({ status: "error", message: "Error updating book status" });
+//   }
+// };
+
 const bookStatusController = async (req: Request, res: Response) => {
-  const { bookId } = req.params;
-  const { shelve } = req.body;
+  const { userId } = req.params;
+  const { shelve, bookId } = req.body;
 
   try {
-    const book = await Books.findById(bookId);
-    if (!book) {
+    let user = await UserModel.findById(userId);
+    if (!user) {
       return res
         .status(404)
-        .json({ status: "fail", message: "Book not found" });
+        .json({ status: "fail", message: "User not found" });
     }
 
-    book.shelve = shelve;
-    await book.save();
+    if (!user.book || !Array.isArray(user.book)) {
+      return res
+        .status(404)
+        .json({ status: "fail", message: "Book collection not found" });
+    }
 
-    res.json({ status: "success", data: book });
+    const bookArr = user.book.find((item: any) => item.bookId === bookId);
+    if (!bookArr) {
+      return res.status(404).json({
+        status: "fail",
+        message: "Book not found in user's collection",
+      });
+    }
+
+    bookArr.shelve = shelve;
+    await user.save();
+
+    res.json({ status: "success", data: user });
   } catch (err) {
+    console.log(err);
     res
       .status(500)
       .json({ status: "error", message: "Error updating book status" });

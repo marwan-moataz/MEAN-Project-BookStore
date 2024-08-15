@@ -5,7 +5,6 @@ const bookSchema = new mongoose.Schema({
   category: { type: String, required: true },
   author: { type: String, required: true },
   photo: { type: String, required: true },
-  shelve: { type: String, required: true },
 });
 
 export const Books = mongoose.model("Book", bookSchema);

@@ -1,4 +1,4 @@
-<table class="table border border-2 rounded-5 align-middle">
+<!-- <table class="table border border-2 rounded-5 align-middle">
   <thead class="table-light">
     <tr>
       @for (item of tableHeader; track $index) {
@@ -18,37 +18,77 @@
           alt="book image"
         />
       </td>
-      <td>{{ item.name }}</td>
-      <td *ngIf="item.photo">{{ item.category || item.lastName }}</td>
-      <td *ngIf="item.photo">{{ item.author || item.birthDate }}</td>
-      <td>
-        <div class="d-flex gap-4 flex-column align-items-center">
-          <button
-            (click)="modalType = 'Update'"
-            class="actionBtn btn fs-2"
-            data-bs-toggle="modal"
-            [attr.data-bs-target]="'#formModal' + item._id"
-          >
-            <i class="bx bxs-pencil"></i>
-          </button>
-          <button
-            class="actionBtn btn fs-2"
-            (click)="modalType = 'Delete'"
-            data-bs-toggle="modal"
-            [attr.data-bs-target]="'#formModal' + item._id"
-          >
-            <i class="bx bxs-trash-alt"></i>
-          </button>
-        </div>
+      <td>{{ item.author }}</td>
+      <td *ngIf="item.photo">{{ item.averageRating }}</td>
+      <td *ngIf="item.photo">{{ item.rating }}</td>
+      <td class="w-25">
+        <select
+          class="form-select w-50"
+          (change)="updateStatusBook(item._id, $event)"
+          [value]="item.shelve"
+          aria-label="Default select example"
+        >
+          <option selected value="null">Choose Status</option>
+          <option value="read">Read</option>
+          <option value="want to read">Want to Read</option>
+          <option value="reading">Reading</option>
+        </select>
       </td>
-      <!-- Replace the following Form With yours -->
-      <app-books-form
-        style="position: absolute; top: 0"
-        [formActionType]="modalType"
-        [book]="item"
-      ></app-books-form>
     </tr>
 
     }
+  </tbody>
+</table> -->
+
+<!-- Filter Dropdown -->
+<div class="mt-5 mb-3 w-25 d-flex justify-content-center flex-column mx-auto">
+  <label for="filter" class="form-label text-center">Filter by Status</label>
+  <select
+    id="filter"
+    class="form-select"
+    (change)="onFilterChange($event)"
+    [value]="selectedFilter"
+  >
+    <option *ngFor="let option of filterOptions" [value]="option.value">
+      {{ option.label }}
+    </option>
+  </select>
+</div>
+
+<!-- Table -->
+<table class="table border border-2 rounded-5 align-middle container">
+  <thead class="table-light">
+    <tr>
+      <th *ngFor="let item of tableHeader">{{ item }}</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let item of filteredTableData; let i = index">
+      <th scope="row">{{ i + 1 }}</th>
+      <td *ngIf="item.photo">
+        <img
+          style="max-height: 200px; max-width: 100px"
+          [src]="item.photo"
+          alt="book image"
+        />
+      </td>
+      <td>{{ item.author }}</td>
+      <td *ngIf="item.photo">{{ item.averageRating }}</td>
+      <td *ngIf="item.photo">{{ item.rating }}</td>
+      <td class="w-25">
+        <select
+          class="form-select w-50"
+          (change)="updateStatusBook(item._id, $event)"
+          [value]="item.shelve"
+          aria-label="Default select example"
+        >
+          <option value="null">Choose Status</option>
+          <option value="read">Read</option>
+          <option value="want to read">Want to Read</option>
+          <option value="reading">Reading</option>
+        </select>
+      </td>
+    </tr>
   </tbody>
 </table>

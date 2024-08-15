@@ -14,6 +14,10 @@ export class BookService {
     return this.http.get<Book[]>(this.apiUrl + `?limit=${limit}&page=${page}`);
   }
 
+  getSingleBooks(bookId: string): Observable<Book[]> {
+    return this.http.get<Book[]>(this.apiUrl + '/' + bookId);
+  }
+
   addBook(book: Book): Observable<Book> {
     return this.http.post<Book>(this.apiUrl, book);
   }

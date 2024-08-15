@@ -30,17 +30,17 @@
         </li>
       </ul>
       <form class="d-flex justify-content-between" role="search">
-        <button *ngIf="!user.email" class="btn login ms-3" routerLink="/login">
+        <button *ngIf="!user.token" class="btn login ms-3" routerLink="/login">
           Login
         </button>
         <div class="username" *ngIf="user.email" routerLink="/userProfile">
           {{ user.name }}
           <div class="profile-picture">
-            <img [src]="user.profilePicture" alt="pp" />
+            <img src="{{ user.profilePicture }}" alt="pp" />
           </div>
         </div>
         <button
-          *ngIf="user.email"
+          *ngIf="user.token"
           class="btn btn-outline-danger"
           (click)="logOut()"
           routerLink="/login"
@@ -48,7 +48,7 @@
           Logout
         </button>
         <button
-          *ngIf="!user.email"
+          *ngIf="!user.token"
           class="btn signup ms-3"
           routerLink="/register"
           type="submit"

@@ -13,13 +13,13 @@ import { NgIf } from '@angular/common';
 })
 export class HeaderComponent {
   user!: User;
-  constructor(private userService: UserServicesService) {
-    userService.userObservable.subscribe((newUser) => {
+  constructor(private userService: UserServicesService) {}
+
+  ngOnInit(): void {
+    this.userService.userObservable.subscribe((newUser) => {
       this.user = newUser;
     });
   }
-
-  ngOnInit(): void {}
 
   logOut() {
     this.userService.logOut();
