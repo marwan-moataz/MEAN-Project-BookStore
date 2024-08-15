@@ -1,0 +1,6 @@
+.active-link {
+  color: black;
+  transform: scale(1.2);
+  border: none;
+  outline: none;
+}

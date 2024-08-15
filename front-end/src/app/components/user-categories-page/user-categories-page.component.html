@@ -1,0 +1,7 @@
+<div
+  class="container d-flex flex-wrap gap-5 my-5 mx-auto align-items-center justify-content-center"
+>
+  @for (item of categories; track $index) {
+  <app-category-card [category]="item"></app-category-card>
+  }
+</div>

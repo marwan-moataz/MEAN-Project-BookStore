@@ -1,0 +1,51 @@
+<div class="book-cards">
+  <div class="book-card p-2">
+    <div class="content-wrapper">
+      <img [src]="bookData.photo" alt="" class="book-card-img" />
+      <div class="card-content">
+        <div class="book-name">{{ bookData.name }}</div>
+        <div class="book-by">by {{ bookData.author }}</div>
+        <div class="rating">
+          <div class="d-flex flex-row-reverse align-items-center gap-2">
+            <div>
+              @for (item of [5,4,3,2,1]; track $index) {
+              <input
+                value="{{ item }}"
+                name="stars"
+                id="star{{ item }}"
+                type="radio"
+                disabled
+                [attr.checked]="
+                  bookData.averageRating! <= item ? 'checked' : null
+                "
+              />
+              <label for="star{{ item }}"></label>
+              }
+            </div>
+
+            <span> {{ bookData.averageRating }} / 5 </span>
+          </div>
+          <span class="book-voters card-vote"
+            ><b> {{ bookData.reviews?.length }}</b> voters</span
+          >
+        </div>
+        <div class="book-sum card-sum">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex laborum
+          laboriosam itaque eos eveniet, suscipit deserunt tempore quos
+          inventore officiis soluta modi accusantium hic explicabo vitae,
+          possimus assumenda! Corrupti, aspernatur?
+        </div>
+      </div>
+    </div>
+    <select
+      class="form-select my-3 mx-auto w-75 border border-primary"
+      aria-label="Default select example"
+      [formControl]="bookStatus"
+    >
+      <option value="null" hidden selected>Choose Your Book Status</option>
+      <option value="want to read" selected>Want to read</option>
+      <option value="reading" selected>Currently Reading</option>
+      <option value="read" selected>Finished Reading</option>
+    </select>
+  </div>
+</div>

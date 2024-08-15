@@ -1,0 +1,118 @@
+<div
+  class="modal fade"
+  [id]="'formModal' + book._id"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          {{ formActionType }} Book
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      @if ( formActionType == 'Add' || formActionType == 'Update') {
+
+      <div class="modal-body">
+        <form class="d-flex flex-column gap-3">
+          <div>
+            <label for="exampleInputEmail1" class="form-label"
+              >Book Title</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputEmail1"
+              placeholder="Enter your book title"
+              [formControl]="bookName"
+              [value]="book.name || 'Enter Book Name'"
+            />
+          </div>
+          <div>
+            <label for="exampleInputEmail1" class="form-label"
+              >Book Category</label
+            >
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              [formControl]="bookCategory"
+            >
+              <option
+                selected
+                [hidden]="!book.category"
+                [value]="book.category || 'Select Category'"
+              >
+                {{ book.category || "Select Category" }}
+              </option>
+              @for (item of categoryList; track $index) {
+              <option value="{{ item }}">{{ item }}</option>
+              }
+            </select>
+          </div>
+          <div>
+            <label for="exampleInputEmail1" class="form-label"
+              >Book Author</label
+            >
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              [formControl]="bookAuthor"
+            >
+              <option
+                selected
+                [hidden]="!book.author"
+                [value]="book.author || 'Select Author'"
+              >
+                {{ book.author || "Select Author" }}
+              </option>
+              @for (item of authorList; track $index) {
+              <option value="{{ item }}">{{ item }}</option>
+              }
+            </select>
+          </div>
+          <div>
+            <label for="exampleInputEmail1" class="form-label"
+              >Book Image Link</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="inputGroupFile01"
+              placeholder="Enter Book Image Link"
+              [formControl]="bookPhoto"
+            />
+          </div>
+        </form>
+      </div>
+
+      } @else if (formActionType == 'Delete') {
+      <div class="modal-body fs-3 text-danger-emphasis">
+        <p>
+          <b> {{ book.name }}</b> will be Permanently deleted <br />
+          <b>are you sure?</b>
+        </p>
+      </div>
+      }
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          [ngClass]="{ 'btn-danger': formActionType === 'Delete' }"
+          (click)="formSubmitHandler($event)"
+        >
+          {{ formActionType }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
