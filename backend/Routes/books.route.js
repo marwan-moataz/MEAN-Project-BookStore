@@ -18,9 +18,7 @@ router
 
 router.route("/review/:bookId").post(booksController.insertReview);
 
-router
-  .route("/byCategory/:categoryId")
-  .get(booksController.getBookByCategoryId);
+router.route("/byCategory/:category").get(booksController.getBookByCategory);
 router.route("/byAuthor/:authorId").get(booksController.getBookByAuthorId);
 
 module.exports = router;

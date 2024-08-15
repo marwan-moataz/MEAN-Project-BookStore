@@ -1,31 +1,35 @@
 import { Component } from '@angular/core';
-import { SingleBookCardComponent } from './single-book-card/single-book-card.component';
+import { SingleBookCardComponent } from '../users-book-page/single-book-card/single-book-card.component';
 import { Book } from '../../models/book.model';
 import { BookService } from '../../services/book.service';
-import { CommonModule } from '@angular/common';
-import { PaginationComponent } from '../../shared/pagination/pagination.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-users-book-page',
+  selector: 'app-user-single-category-page',
   standalone: true,
-  imports: [SingleBookCardComponent, CommonModule, PaginationComponent],
-  templateUrl: './users-book-page.component.html',
-  styleUrl: './users-book-page.component.css',
+  imports: [SingleBookCardComponent],
+  templateUrl: './user-single-category-page.component.html',
+  styleUrl: './user-single-category-page.component.css',
 })
-export class UsersBookPageComponent {
+export class UserSingleCategoryPageComponent {
   currentPage: number = 1;
   booksCount: number = 0;
   moreBooks: boolean = false;
+  category: string = '';
 
   pageSize: number = 6;
   books: Book[] = [];
-  constructor(private bookService: BookService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private bookService: BookService
+  ) {}
   ngOnInit(): void {
     this.getBooks();
   }
   getBooks(): void {
+    this.category = this.route.snapshot.params['category'];
     this.bookService
-      .getBooks(this.currentPage, this.pageSize)
+      .getCategoryBooks(this.currentPage, this.pageSize, this.category)
       .subscribe((data: any) => {
         this.books = data.data.books;
         this.booksCount == 0 ? (this.booksCount = data.data.booksCount) : '';

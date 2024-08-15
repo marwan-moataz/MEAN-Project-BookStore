@@ -23,7 +23,7 @@
       <td *ngIf="item.photo">{{ item.category || item.lastName }}</td>
       <td *ngIf="item.photo">{{ item.author || item.birthDate }}</td>
       <td>
-        <div class="d-flex gap-4 flex-column align-items-center">
+        <div class="d-flex gap-4 align-items-center">
           <button
             (click)="modalType = 'Update'"
             class="actionBtn btn fs-2"
@@ -44,10 +44,18 @@
       </td>
       <!-- Replace the following Form With yours -->
       <app-books-form
+        *ngIf="adminPage === 'books'"
         style="position: absolute; top: 0"
         [formActionType]="modalType"
         [book]="item"
       ></app-books-form>
+
+      <app-categories-form
+        [formActionType]="modalType"
+        *ngIf="adminPage === 'categories'"
+        style="position: absolute; top: 0"
+        [category]="item"
+      ></app-categories-form>
     </tr>
 
     }

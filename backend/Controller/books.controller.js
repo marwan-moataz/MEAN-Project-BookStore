@@ -71,15 +71,23 @@ const getBookByAuthorId = async (req, res) => {
   }
 };
 
-const getBookByCategoryId = async (req, res) => {
-  const categoryId = req.params.categoryId;
+const getBookByCategory = async (req, res) => {
+  const category = req.params.category;
   try {
-    const books = await Books.find({ category: categoryId });
+    const { limit = 5, page = 1 } = req.query;
+    const skip = (page - 1) * limit;
+
+    const books = await Books.find({ category: category })
+      .limit(limit)
+      .skip(skip);
+    const booksCount = await Books.find({
+      category: category,
+    }).countDocuments();
 
     if (books.length == 0) {
       res.json({ status: "fail", data: { books }, message: "book not found" });
     } else {
-      res.json({ status: "success", data: { books } });
+      res.json({ status: "success", data: { books, booksCount } });
     }
   } catch (err) {
     res.status(500).json({ status: "error", message: "incorrect Id Format" });
@@ -181,7 +189,7 @@ module.exports = {
   addNewBook,
   getBookById,
   getBookByAuthorId,
-  getBookByCategoryId,
+  getBookByCategory,
   getAllBooks,
   updateBookById,
   insertReview,

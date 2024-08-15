@@ -20,6 +20,19 @@ export class BookService {
       .pipe(finalize(() => this.loaderService.hide()));
   }
 
+  getCategoryBooks(
+    page: number = 1,
+    limit: number = 5,
+    categoryName: string
+  ): Observable<Book[]> {
+    this.loaderService.show();
+    return this.http
+      .get<Book[]>(
+        this.apiUrl + `/byCategory/${categoryName}?limit=${limit}&page=${page}`
+      )
+      .pipe(finalize(() => this.loaderService.hide()));
+  }
+
   getSingleBooks(bookId: string): Observable<Book[]> {
     this.loaderService.show();
     return this.http

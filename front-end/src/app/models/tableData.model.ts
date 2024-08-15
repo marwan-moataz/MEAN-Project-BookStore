@@ -4,6 +4,7 @@ export interface TableData {
   name?: string;
   lastName?: string;
   category?: string;
+  categoryName?: string;
   author?: string;
   birthDate?: string;
 }
