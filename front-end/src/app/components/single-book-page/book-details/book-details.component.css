@@ -8,6 +8,7 @@
 
 .book-card {
   margin-top: 10vh;
+  max-width: 60vw;
   background-color: #fff;
   box-shadow: -1px 3px 8px -1px rgba(0, 0, 0, 0.1);
   border-radius: 4px;

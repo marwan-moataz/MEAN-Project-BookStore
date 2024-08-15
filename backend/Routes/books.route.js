@@ -16,6 +16,8 @@ router
   .patch(booksController.updateBookById)
   .delete(booksController.deleteBookById);
 
+router.route("/review/:bookId").post(booksController.insertReview);
+
 router
   .route("/byCategory/:categoryId")
   .get(booksController.getBookByCategoryId);

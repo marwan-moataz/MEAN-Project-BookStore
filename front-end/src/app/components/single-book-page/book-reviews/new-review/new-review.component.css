@@ -1,5 +1,75 @@
+/*New Review*/
+
+.newReview {
+  display: flex;
+  flex-direction: column;
+  gap: 3vh;
+}
+
+.newReviewHeading h2,
+.newReviewHeading h3 {
+  font-family: "poppins";
+  font-weight: 500;
+}
+.newReviewHeading h3 {
+  font-size: medium;
+  font-family: "poppins";
+  font-weight: 300;
+}
+
+.newReview form {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 3vh;
+}
+
+.newReview form h3 {
+  font-family: "poppins";
+  font-weight: 500;
+}
+.newReview form textarea {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 7px;
+  padding: 10px;
+  outline: none;
+}
+.newReview form input {
+  width: 85%;
+}
+.newReview form textarea {
+  width: 95%;
+  resize: vertical;
+}
+.reviewerData {
+  display: flex;
+  gap: 3vw;
+}
+
+.newRating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5vw;
+}
+.reviewerName {
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+  input {
+    width: 60%;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 7px;
+    padding: 10px;
+    outline: none;
+  }
+}
 .rating {
-  display: inline-block;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .rating input {
@@ -33,68 +103,6 @@
 .rating input:disabled:checked ~ label {
   cursor: default;
   color: #6f00ff;
-}
-
-/*New Review*/
-
-.newReview {
-  display: flex;
-  flex-direction: column;
-  gap: 3vh;
-}
-
-.newReviewHeading h2,
-.newReviewHeading h3 {
-  font-family: "poppins";
-  font-weight: 500;
-}
-.newReviewHeading h3 {
-  font-size: medium;
-  font-family: "poppins";
-  font-weight: 300;
-}
-
-.newRating {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-}
-
-.newReview form {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  gap: 3vh;
-}
-
-.newReview form h3 {
-  font-family: "poppins";
-  font-weight: 500;
-}
-.newReview form input,
-.newReview form textarea {
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 7px;
-  padding: 10px;
-  outline: none;
-}
-.newReview form input {
-  width: 85%;
-}
-.newReview form textarea {
-  width: 95%;
-  resize: vertical;
-}
-.reviewerData {
-  display: flex;
-  gap: 3vw;
-}
-
-.reviewerName,
-.reviewerEmail {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
 }
 
 .newReview form .submitBtn {

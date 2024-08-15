@@ -30,6 +30,7 @@ export class BooksFormComponent {
     this.bookName.setValue(this.book.name!);
     this.bookAuthor.setValue(this.book.author!);
     this.bookCategory.setValue(this.book.category!);
+    this.bookPhoto.setValue(this.book.photo!);
   }
 
   insertBook(book: any): void {

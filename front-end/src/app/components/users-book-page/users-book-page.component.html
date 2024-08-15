@@ -4,6 +4,7 @@
   <div class="d-flex flex-wrap gap-4 justify-content-center my-5">
     @for (item of books; track $index) {
     <app-single-book-card
+      [bookId]="item._id!"
       [photo]="item.photo!"
       [author]="item.author!"
       [title]="item.name!"

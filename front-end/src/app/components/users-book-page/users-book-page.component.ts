@@ -4,6 +4,7 @@ import { Book } from '../../models/book.model';
 import { BookService } from '../../services/book.service';
 import { CommonModule } from '@angular/common';
 import { PaginationComponent } from '../../shared/pagination/pagination.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users-book-page',

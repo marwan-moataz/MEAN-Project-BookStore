@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Book } from '../models/book.model';
+import { Book, BookReviews } from '../models/book.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,9 +13,15 @@ export class BookService {
   getBooks(page: number = 1, limit: number = 5): Observable<Book[]> {
     return this.http.get<Book[]>(this.apiUrl + `?limit=${limit}&page=${page}`);
   }
+  getSingleBooks(bookId: string): Observable<Book[]> {
+    return this.http.get<Book[]>(this.apiUrl + '/' + bookId);
+  }
 
   addBook(book: Book): Observable<Book> {
     return this.http.post<Book>(this.apiUrl, book);
+  }
+  insertReview(review: BookReviews, bookId: string): Observable<Book> {
+    return this.http.post<Book>(this.apiUrl + `/review/${bookId}`, review);
   }
 
   updateBook(bookId: string, book: {}): Observable<Book> {

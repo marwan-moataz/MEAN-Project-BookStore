@@ -1,12 +1,13 @@
 <div class="book">
   <div
     class="bookpic"
+    (click)="showSingleBookPage()"
     style="
       background-image: url('{{ photo }}');
     "
   ></div>
   <div class="bookinfo">
-    <a class="title">{{ title }}</a>
+    <a class="title" (click)="showSingleBookPage()">{{ title }}</a>
     <a class="author">{{ author }}</a>
   </div>
 </div>

@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { PaginationComponent } from '../../shared/pagination/pagination.component';
 import { AdminTableComponent } from '../../shared/admin-table/admin-table.component';
 import { TableData } from '../../models/tableData.model';
+import { BookDetailsComponent } from '../single-book-page/book-details/book-details.component';
 
 @Component({
   selector: 'app-admin-books-page',
@@ -15,6 +16,7 @@ import { TableData } from '../../models/tableData.model';
     CommonModule,
     PaginationComponent,
     AdminTableComponent,
+    BookDetailsComponent,
   ],
   templateUrl: './admin-books-page.component.html',
   styleUrl: './admin-books-page.component.css',

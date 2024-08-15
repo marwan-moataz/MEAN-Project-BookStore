@@ -16,7 +16,7 @@
   </nav>
   <div class="productInformation">
     @if (detailsMode == 'rev') {
-    <app-reviews></app-reviews>
+    <app-reviews [custReviews]="bookRev"></app-reviews>
     }@else if (detailsMode == 'newRev') {
     <app-new-review></app-new-review>
     }

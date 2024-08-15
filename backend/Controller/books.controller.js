@@ -132,6 +132,50 @@ const deleteBookById = async (req, res) => {
   }
 };
 
+const insertReview = async (req, res) => {
+  try {
+    // const errors = validationResult(req);
+    // if (!errors.isEmpty()) {
+    //   return res.status(400).json({ errors: errors.array() });
+    // }
+
+    const bookId = req.params.bookId;
+
+    const book = await Books.findByIdAndUpdate(
+      bookId,
+      { $push: { reviews: req.body } },
+      { new: true } // Return the updated document
+    );
+
+    if (book.length == 0) {
+      return res
+        .status(400)
+        .json({ status: "fail", message: "book id not found " });
+    }
+    const totalRatings = book.reviews.reduce(
+      (acc, review) => acc + review.rating,
+      0
+    );
+
+    const newAverageRating = (totalRatings / book.reviews.length).toFixed(1);
+    book.averageRating = newAverageRating;
+    await book.save();
+
+    return res.json({
+      status: "seccess",
+      message: "book updated successfully",
+    });
+  } catch (err) {
+    console.log(err);
+
+    return res.status(400).json({
+      status: "error",
+      message: "Something Went Wronge error: ",
+      err,
+    });
+  }
+};
+
 module.exports = {
   deleteBookById,
   addNewBook,
@@ -140,4 +184,5 @@ module.exports = {
   getBookByCategoryId,
   getAllBooks,
   updateBookById,
+  insertReview,
 };
