@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { UserModel } from "../models/user.model";
+import { UserModel } from "../Model/user.model";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { User, userBook } from "../models/user.model";
-import { AdminModel } from "../models/adminUser";
-import { Books } from "../models/books.model";
+import { User, userBook } from "../Model/user.model";
+import { AdminModel } from "../Model/admin.model";
+import { Books } from "../Model/books.model";
 
 const loginController = async (req: Request, res: Response) => {
   const { email, password } = req.body;

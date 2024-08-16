@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { IUserLogin } from '../shared/interfaces/IUserLogin';
-import { User } from '../shared/models/User';
+import { User } from '../shared/models/user.model';
 import { IUserRegister } from '../shared/interfaces/IUserRegister';
 import { Book } from '../shared/models/book.model';
 

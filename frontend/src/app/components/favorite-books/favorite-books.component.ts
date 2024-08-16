@@ -4,11 +4,11 @@ import { BookService } from '../../services/book.service';
 import { Book } from '../../shared/models/book.model';
 import { CommonModule } from '@angular/common';
 import { PaginationComponent } from '../pagination/pagination.component';
-import { AdminTableComponent } from '../admin-table/admin-table.component';
+import { AdminTableComponent } from '../user-table/admin-table.component';
 import { TableData } from '../../shared/models/tableData.model';
 
 @Component({
-  selector: 'app-admin-books-page',
+  selector: 'app-favorite-books',
   standalone: true,
   imports: [
     BooksFormComponent,
@@ -16,10 +16,10 @@ import { TableData } from '../../shared/models/tableData.model';
     PaginationComponent,
     AdminTableComponent,
   ],
-  templateUrl: './admin-books-page.component.html',
-  styleUrl: './admin-books-page.component.css',
+  templateUrl: './favorite-books.component.html',
+  styleUrl: './favorite-books.component.css',
 })
-export class AdminBooksPageComponent {
+export class FavoriteBooksComponent {
   modalType = 'Add';
   currentPage = 1;
   pageSize = 5;

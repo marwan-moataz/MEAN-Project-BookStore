@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { IUserLogin } from '../shared/interfaces/IUserLogin';
-import { Admin } from '../shared/models/Admins';
+import { Admin } from '../shared/models/admin.model';
 
 const USER_KEY = 'User';
 

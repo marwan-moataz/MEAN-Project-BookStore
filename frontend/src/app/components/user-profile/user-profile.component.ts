@@ -8,8 +8,8 @@ import {
 import { UserServicesService } from '../../services/user.services.service';
 import { NgFor } from '@angular/common';
 import { AdminBooksPageComponent } from '../admin-books-page/admin-books-page.component';
-import { AdminTableComponent } from '../admin-table/admin-table.component';
-import { userTableData } from '../../shared/interfaces/userTableData';
+import { AdminTableComponent } from '../user-table/admin-table.component';
+import { userTableData } from '../../shared/interfaces/IuserTableData';
 
 @Component({
   standalone: true,

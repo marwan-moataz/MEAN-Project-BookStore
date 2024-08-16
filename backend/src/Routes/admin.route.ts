@@ -1,5 +1,5 @@
 import { Router } from "express";
-import controller from "../controller/controller";
+import controller from "../Controller/user.controller";
 
 const router = Router();
 router.post("/admin", controller.adminController);
