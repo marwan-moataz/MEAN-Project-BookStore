@@ -7,11 +7,12 @@ import {
 } from '@angular/forms';
 import { UserServicesService } from '../../services/user.services.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-login-page',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, NgIf],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css',
 })

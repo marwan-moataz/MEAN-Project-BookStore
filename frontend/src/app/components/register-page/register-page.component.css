@@ -4,6 +4,7 @@ body {
   background-repeat: no-repeat;
   font-family: "Numans", sans-serif;
   background-position: center;
+  height: calc(100vh - 50px);
 }
 
 .registration-form {
@@ -13,7 +14,6 @@ body {
 .title {
   color: gold;
   font-size: 2rem;
-  border: 1px solid gold;
   border-radius: 50px;
 }
 
@@ -29,22 +29,13 @@ body {
 }
 
 input {
-  background-color: black;
+  background-color: white;
   border: none;
-  border-bottom: 1px solid gold;
-  color: gold;
-}
-
-input[type="text"]::-webkit-input-placeholder,
-input[type="password"]::-webkit-input-placeholder,
-input[type="email"]::-webkit-input-placeholder {
-  color: gold;
+  border: 1px solid gold;
 }
 
 input:focus {
-  box-shadow: 0px 2px 10px gold;
-  background-color: black;
-  color: gold;
+  box-shadow: -10px 2px 50px gold;
 }
 
 .registration-form .form-icon {

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { UserServicesService } from '../../services/user.services.service';
-import { User } from '../../shared/models/User';
+import { User } from '../../shared/models/user.model';
 import { NgIf } from '@angular/common';
 
 @Component({
@@ -13,16 +13,17 @@ import { NgIf } from '@angular/common';
 })
 export class HeaderComponent {
   user!: User;
-  constructor(private userService: UserServicesService) {
-    userService.userObservable.subscribe((newUser) => {
+  constructor(private userService: UserServicesService) {}
+
+  ngOnInit(): void {
+    this.userService.userObservable.subscribe((newUser) => {
       this.user = newUser;
     });
   }
 
-  ngOnInit(): void {}
-
   logOut() {
     this.userService.logOut();
+    confirm('Are You sure you want to logout ?');
   }
 
   get isAuth() {

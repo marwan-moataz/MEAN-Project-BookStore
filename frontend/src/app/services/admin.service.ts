@@ -2,9 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { USER_LOGIN_URL } from '../shared/constants/urls';
 import { IUserLogin } from '../shared/interfaces/IUserLogin';
-import { Admin } from '../shared/models/Admins';
+import { Admin } from '../shared/models/admin.model';
 
 const USER_KEY = 'User';
 
@@ -33,7 +32,7 @@ export class AdminService {
           this.toastrService.success('Login Successful', user.name);
         },
         error: (errorResponse) => {
-          this.toastrService.error(errorResponse.error, 'Sorry');
+          this.toastrService.error('Try Again', 'Sorry');
         },
       })
     );

@@ -3,8 +3,17 @@
   color: gold;
 }
 
-a {
-  color: gold !important;
+.navbar-brand {
+  color: gold;
+}
+
+.navbar-brand span {
+  color: red;
+}
+
+.nav-item a {
+  color: gold;
+  transition: 0.3s;
 }
 
 .login {
@@ -37,7 +46,30 @@ a {
   display: flex;
   align-items: center;
   margin-right: 1rem;
-  border: 1px solid gold;
   padding: 0.5rem;
   border-radius: 3px;
+  cursor: pointer;
+}
+
+.profile-picture {
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  margin-left: 1rem;
+  border-radius: 50%;
+  /* border: 1px solid gold; */
+}
+
+.profile-picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  border-radius: 50%;
+}
+
+.nav-item:hover a,
+.nav-item::selection a {
+  background-color: gold;
+  border-radius: 10px;
+  color: black;
 }
