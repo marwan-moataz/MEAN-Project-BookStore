@@ -1,0 +1,106 @@
+<div
+  class="modal fade"
+  [id]="'formModal' + book._id"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          {{ formActionType }} Book
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      @if ( formActionType == 'Add' || formActionType == 'Update') {
+
+      <div class="modal-body">
+        <form class="d-flex flex-column gap-3">
+          <div>
+            <label for="exampleInputEmail1" class="form-label"
+              >Book Title</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputEmail1"
+              [formControl]="bookName"
+              [value]="book.name || 'Enter Book Name'"
+            />
+          </div>
+          <div>
+            <label for="exampleInputEmail1" class="form-label"
+              >Book Category</label
+            >
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              [formControl]="bookCategory"
+            >
+              <option selected>
+                {{ book.category || "Select Category" }}
+              </option>
+              <option value="Category">One</option>
+              <option value="Category">Two</option>
+              <option value="Category">Three</option>
+            </select>
+          </div>
+          <div>
+            <label for="exampleInputEmail1" class="form-label"
+              >Book Author</label
+            >
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              [formControl]="bookAuthor"
+            >
+              <option selected>{{ book.author || "Select Author" }}</option>
+              <option value="Author">One</option>
+              <option value="Author">Two</option>
+              <option value="Author">Three</option>
+            </select>
+          </div>
+          <div>
+            <label for="exampleInputEmail1" class="form-label"
+              >Book Image Link</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="inputGroupFile01"
+              [formControl]="bookPhoto"
+            />
+          </div>
+        </form>
+      </div>
+
+      } @else if (formActionType == 'Delete') {
+      <div class="modal-body fs-3 text-danger-emphasis">
+        <p>
+          <b> {{ book.name }}</b> will be Permanently deleted <br />
+          <b>are you sure?</b>
+        </p>
+      </div>
+      }
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          [ngClass]="{ 'btn-danger': formActionType === 'Delete' }"
+          (click)="formSubmitHandler($event)"
+        >
+          {{ formActionType }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
