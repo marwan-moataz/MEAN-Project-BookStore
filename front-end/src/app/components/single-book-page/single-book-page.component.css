@@ -1,0 +1,5 @@
+.wrapper {
+  background-color: #f2f5f7;
+  height: 100vh;
+  overflow-y: scroll;
+}

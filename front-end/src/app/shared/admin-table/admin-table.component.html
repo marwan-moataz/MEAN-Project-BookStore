@@ -1,0 +1,63 @@
+<table class="table border border-2 rounded-5 align-middle">
+  <thead class="table-light">
+    <tr>
+      @for (item of tableHeader; track $index) {
+      <th scope="col">{{ item }}</th>
+      }
+    </tr>
+  </thead>
+
+  <tbody>
+    @for (item of tableData; track $index) {
+    <tr>
+      <th scope="row">{{ $index + 1 }}</th>
+      <td *ngIf="item.photo">
+        <img
+          style="max-height: 200px; max-width: 100px"
+          [src]="item.photo"
+          (error)="setDefaultImage($event)"
+          alt="book image"
+        />
+      </td>
+      <td>{{ item.name }}</td>
+      <td *ngIf="item.photo">{{ item.category || item.lastName }}</td>
+      <td *ngIf="item.photo">{{ item.author || item.birthDate }}</td>
+      <td>
+        <div class="d-flex gap-4 align-items-center">
+          <button
+            (click)="modalType = 'Update'"
+            class="actionBtn btn fs-2"
+            data-bs-toggle="modal"
+            [attr.data-bs-target]="'#formModal' + item._id"
+          >
+            <i class="bx bxs-pencil"></i>
+          </button>
+          <button
+            class="actionBtn btn fs-2"
+            (click)="modalType = 'Delete'"
+            data-bs-toggle="modal"
+            [attr.data-bs-target]="'#formModal' + item._id"
+          >
+            <i class="bx bxs-trash-alt"></i>
+          </button>
+        </div>
+      </td>
+      <!-- Replace the following Form With yours -->
+      <app-books-form
+        *ngIf="adminPage === 'books'"
+        style="position: absolute; top: 0"
+        [formActionType]="modalType"
+        [book]="item"
+      ></app-books-form>
+
+      <app-categories-form
+        [formActionType]="modalType"
+        *ngIf="adminPage === 'categories'"
+        style="position: absolute; top: 0"
+        [category]="item"
+      ></app-categories-form>
+    </tr>
+
+    }
+  </tbody>
+</table>

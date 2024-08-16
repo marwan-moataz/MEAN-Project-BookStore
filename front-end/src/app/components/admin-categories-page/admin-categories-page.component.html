@@ -1,0 +1,29 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between p-2">
+    <app-admin-navigation></app-admin-navigation>
+    <button
+      class="actionBtn btn fs-2"
+      (click)="modalType = 'Add'"
+      type="button"
+      data-bs-toggle="modal"
+      data-bs-target="#categoryFormModal"
+    >
+      <i class="bx bxs-book-add"></i>
+    </button>
+  </div>
+
+  <app-admin-table
+    [tableHeader]="tableHeader"
+    [tableData]="categories"
+    adminPage="categories"
+  ></app-admin-table>
+  <app-books-form [formActionType]="modalType"></app-books-form>
+
+  <app-pagination
+    [nextIsEnabled]="moreCategories"
+    [currentPage]="currentPage"
+    [nextBtnHandler]="nextBtnOnclick"
+    [previousBtnHandler]="previousBtnOnclick"
+  ></app-pagination>
+  <app-categories-form></app-categories-form>
+</div>

@@ -1,0 +1,28 @@
+<div class="container d-flex flex-column mx-auto mt-4">
+  <h1 class="display-5">Books</h1>
+  @if (booksCount) {
+  <div class="d-flex flex-wrap gap-4 justify-content-center my-5">
+    @for (item of books; track $index) {
+    <app-single-book-card
+      [bookId]="item._id!"
+      [photo]="item.photo!"
+      [author]="item.author!"
+      [title]="item.name!"
+    ></app-single-book-card>
+    }@empty {
+    <h1 class="d-block mx-auto display-3 mt-5 text-danger">Empty Shelfs</h1>
+    }
+  </div>
+
+  <app-pagination
+    [nextIsEnabled]="moreBooks"
+    [currentPage]="currentPage"
+    [nextBtnHandler]="nextBtnOnclick"
+    [previousBtnHandler]="previousBtnOnclick"
+  ></app-pagination>
+  }@else {
+  <h1 class="d-block mx-auto display-3 mt-5 text-danger">
+    The Store is Under Maintenance
+  </h1>
+  }
+</div>

@@ -1,0 +1,64 @@
+<div
+  class="modal fade"
+  [id]="category._id ? 'formModal' + category._id : 'categoryFormModal'"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          {{ formActionType }} Category
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      @if ( formActionType == 'Add' || formActionType == 'Update') {
+
+      <div class="modal-body">
+        <form class="d-flex flex-column gap-3">
+          <div>
+            <label for="exampleInputEmail1" class="form-label"
+              >Category Name</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputEmail1"
+              placeholder="Enter your Category name"
+              [formControl]="categoryName"
+              [value]="category.name"
+            />
+          </div>
+        </form>
+      </div>
+
+      } @else if (formActionType == 'Delete') {
+      <div class="modal-body fs-3 text-danger-emphasis">
+        <p>
+          <b> {{ category.name }}</b> will be Permanently deleted <br />
+          <b>are you sure?</b>
+        </p>
+      </div>
+      }
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          [ngClass]="{ 'btn-danger': formActionType === 'Delete' }"
+          (click)="formSubmitHandler($event)"
+        >
+          {{ formActionType }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

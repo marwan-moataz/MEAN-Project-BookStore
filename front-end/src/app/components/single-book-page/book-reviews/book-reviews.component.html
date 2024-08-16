@@ -1,0 +1,24 @@
+<section class="productDetails">
+  <nav>
+    <ul>
+      <li>
+        <button id="productRev" (click)="changeDetailsMode('rev')">
+          Reviews
+        </button>
+      </li>
+      <span class="revCount">{{ bookRev?.length || 0 }}</span>
+      <li>
+        <button id="writeNewRev" (click)="changeDetailsMode('newRev')">
+          Write a review
+        </button>
+      </li>
+    </ul>
+  </nav>
+  <div class="productInformation">
+    @if (detailsMode == 'rev') {
+    <app-reviews [custReviews]="bookRev"></app-reviews>
+    }@else if (detailsMode == 'newRev') {
+    <app-new-review></app-new-review>
+    }
+  </div>
+</section>

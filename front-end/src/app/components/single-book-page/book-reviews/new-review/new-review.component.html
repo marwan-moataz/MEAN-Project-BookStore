@@ -1,0 +1,77 @@
+<div class="newReview">
+  <div class="newReviewHeading">
+    <h2>Add a review</h2>
+    <br />
+  </div>
+  <div class="newRating">
+    <div class="reviewerName">
+      <h3 for="name">Name</h3>
+      <input type="text" name="" id="" [formControl]="reviewerName" />
+    </div>
+
+    <div class="rating">
+      <h3>Your Rating</h3>
+      <div>
+        <input
+          value="5"
+          name="newRating"
+          id="starFive"
+          type="radio"
+          [(ngModel)]="selectedRating"
+          (change)="onRatingChange($event)"
+        />
+        <label for="starFive"></label>
+        <input
+          value="4"
+          name="newRating"
+          id="starFour"
+          type="radio"
+          [(ngModel)]="selectedRating"
+          (change)="onRatingChange($event)"
+        />
+        <label for="starFour"></label>
+        <input
+          value="3"
+          name="newRating"
+          id="starThree"
+          type="radio"
+          [(ngModel)]="selectedRating"
+          (change)="onRatingChange($event)"
+        />
+        <label for="starThree"></label>
+        <input
+          value="2"
+          name="newRating"
+          id="starTwo"
+          type="radio"
+          [(ngModel)]="selectedRating"
+          (change)="onRatingChange($event)"
+        />
+        <label for="starTwo"></label>
+        <input
+          value="1"
+          name="newRating"
+          id="starOne"
+          type="radio"
+          [(ngModel)]="selectedRating"
+          (change)="onRatingChange($event)"
+        />
+        <label for="starOne"></label>
+      </div>
+    </div>
+  </div>
+  <form>
+    <div class="reviewBody">
+      <h3 for="reviewerComment">Your review</h3>
+      <textarea
+        [formControl]="comment"
+        name="reviewerComment"
+        id="reviewerComment"
+        cols="80"
+        rows="7"
+      ></textarea>
+    </div>
+
+    <button (click)="submitBtnHandler($event)" class="submitBtn">SUBMIT</button>
+  </form>
+</div>
