@@ -13,7 +13,7 @@ import { AdminService } from '../../services/admin.service';
   standalone: true,
   imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './admin-login.component.html',
-  styleUrl: './admin-login.component.css',
+  styleUrl: '../login-page/login-page.component.css',
 })
 export class AdminLoginComponent {
   adminLoginForm!: FormGroup;

@@ -1,10 +1,11 @@
-import { Router } from "express";
-import controller from "../Controller/user.controller";
+const express = require("express");
 
-const router = Router();
+const controller = require("../Controller/user.controller");
+const router = express.Router();
+
 router.post("/admin", controller.adminController);
 
-export default router;
+module.exports = router;
 
 // if (!user) {
 //   return res.status(401).json({ message: "Invalid credentials" });

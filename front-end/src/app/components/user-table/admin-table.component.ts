@@ -33,7 +33,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BooksFormComponent } from '../favorite-books/book-form/book-form.component';
 import { FormControl, FormsModule } from '@angular/forms';
-import { UserServicesService } from '../../services/user.services.service';
+import { UserServicesService } from '../../services/user.services';
 
 @Component({
   selector: 'app-admin-table',

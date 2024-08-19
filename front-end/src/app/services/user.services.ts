@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { IUserLogin } from '../shared/interfaces/IUserLogin';
+import { IUserLogin } from '../shared/interfaces/IUserLogin.interface';
 import { User } from '../shared/models/user.model';
 import { IUserRegister } from '../shared/interfaces/IUserRegister';
 import { Book } from '../shared/models/book.model';
@@ -26,7 +26,7 @@ export class UserServicesService {
   }
 
   login(userLogin: IUserLogin): Observable<any> {
-    return this.http.post<any>('http://localhost:4000/login', userLogin).pipe(
+    return this.http.post<any>('http://localhost:3333/login', userLogin).pipe(
       tap({
         next: (user) => {
           this.setUserToLocalStorage(user);
@@ -44,7 +44,7 @@ export class UserServicesService {
     );
   }
   // updateBookStatus(bookId: string, newStatus: string): Observable<any> {
-  //   return this.http.patch(`http://localhost:4000/books/${bookId}/status`, {
+  //   return this.http.patch(`http://localhost:3333/books/${bookId}/status`, {
   //     shelve: newStatus,
   //   });
   // }
@@ -53,22 +53,22 @@ export class UserServicesService {
     newStatus: string,
     userId: string
   ): Observable<any> {
-    return this.http.patch(`http://localhost:4000/books/${userId}/status`, {
+    return this.http.patch(`http://localhost:3333/books/${userId}/status`, {
       shelve: newStatus,
       bookId,
     });
   }
 
   getBooksByShelve(shelve: string): Observable<any> {
-    return this.http.get(`http://localhost:4000/books?shelve=${shelve}`);
+    return this.http.get(`http://localhost:3333/books?shelve=${shelve}`);
   }
   getSingleBooks(bookId: string): Observable<Book[]> {
-    return this.http.get<Book[]>('http://localhost:4000/books/' + bookId);
+    return this.http.get<Book[]>('http://localhost:3333/api/books/' + bookId);
   }
 
   register(formData: IUserRegister): Observable<User> {
     return this.http
-      .post<User>('http://localhost:4000/register', formData)
+      .post<User>('http://localhost:3333/register', formData)
       .pipe(
         tap({
           next: (user) => {

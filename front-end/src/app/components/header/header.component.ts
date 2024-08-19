@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { UserServicesService } from '../../services/user.services.service';
+import { UserServicesService } from '../../services/user.services';
 import { User } from '../../shared/models/user.model';
 import { NgIf } from '@angular/common';
 

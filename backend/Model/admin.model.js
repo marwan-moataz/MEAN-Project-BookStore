@@ -1,11 +1,6 @@
-import { Schema, model } from "mongoose";
+const { Schema, model } = require("mongoose");
 
-export interface AdminUser {
-  email: string;
-  password: string;
-}
-
-export const AdminSchema = new Schema<AdminUser>(
+const AdminSchema = new Schema(
   {
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
@@ -21,4 +16,6 @@ export const AdminSchema = new Schema<AdminUser>(
   }
 );
 
-export const AdminModel = model<AdminUser>("Admin", AdminSchema);
+const AdminModel = model("Admin", AdminSchema);
+
+module.exports = { AdminModel };

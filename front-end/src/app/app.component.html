@@ -1,2 +1,5 @@
-<app-loader *ngIf="loading$ | async"></app-loader>
-<router-outlet />
+<div class="mainApplication">
+  <app-header></app-header>
+  <app-loader *ngIf="loading$ | async"></app-loader>
+  <router-outlet />
+</div>

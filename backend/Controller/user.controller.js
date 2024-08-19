@@ -1,12 +1,10 @@
-import { Request, Response } from "express";
-import { UserModel } from "../Model/user.model";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
-import { User, userBook } from "../Model/user.model";
-import { AdminModel } from "../Model/admin.model";
-import { Books } from "../Model/books.model";
+const { UserModel } = require("../Model/user.model");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const { AdminModel } = require("../Model/admin.model"); // <---
+const { Books } = require("../Model/books.model");
 
-const loginController = async (req: Request, res: Response) => {
+const loginController = async (req, res) => {
   const { email, password } = req.body;
   const user = await UserModel.findOne({ email });
 
@@ -31,32 +29,33 @@ const loginController = async (req: Request, res: Response) => {
   }
 };
 
-const strongPasswordPattern =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+const strongPasswordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
-const validatePassword = (password: string): boolean => {
+const validatePassword = (password) => {
   return strongPasswordPattern.test(password);
 };
 
-const registerController = async (req: Request, res: Response) => {
+const registerController = async (req, res) => {
   const { name, email, password, confirmPassword, profilePicture } = req.body;
   const user = await UserModel.findOne({ email });
+
+  console.log(strongPasswordPattern.test(password));
 
   if (user) {
     res.status(400).json({ message: "user is already exist, please login" });
     return;
   } else if (password !== confirmPassword) {
-    res.status(400).json({ message: "Passwords don't match" });
+    return res.status(400).json({ message: "Passwords don't match" });
   }
   if (!validatePassword(password)) {
     return res.status(400).json({
       message:
-        "Password must be at least 8 characters long and include uppercase letters, lowercase letters, digits, and special characters.",
+        "Password must be at least eight characters, at least one letter and one number.",
     });
   }
   const encryptedPassword = await bcrypt.hash(password, 10);
 
-  const newUser: User = {
+  const newUser = {
     id: "",
     name,
     email: email.toLowerCase(),
@@ -64,20 +63,13 @@ const registerController = async (req: Request, res: Response) => {
     confirmPassword: encryptedPassword,
     profilePicture,
     isAdmin: false,
-    book: [
-      {
-        bookId: "",
-        shelve: null,
-        rating: 0,
-        comment: "",
-      },
-    ] as userBook[],
+    book: [],
   };
   const dbUser = await UserModel.create(newUser);
   res.send(generateTokenResponse(dbUser));
 };
 
-// const bookStatusController = async (req: Request, res: Response) => {
+// const bookStatusController = async (req, res) => {
 //   const { userId } = req.params;
 //   const { shelve, bookId } = req.body;
 
@@ -90,12 +82,12 @@ const registerController = async (req: Request, res: Response) => {
 //     }
 //     console.log(user);
 
-//     const bookArr = user.book.find((item: any) => {
+//     const oldbook = user.book.find((item: any) => {
 //       item.bookId === bookId;
 //     });
-//     console.log(bookArr);
+//     console.log(oldbook);
 
-//     user.book = bookArr;
+//     user.book = oldbook;
 //     await user.save();
 
 //     res.json({ status: "success", data: user });
@@ -107,7 +99,7 @@ const registerController = async (req: Request, res: Response) => {
 //   }
 // };
 
-const bookStatusController = async (req: Request, res: Response) => {
+const bookStatusController = async (req, res) => {
   const { userId } = req.params;
   const { shelve, bookId } = req.body;
 
@@ -119,21 +111,24 @@ const bookStatusController = async (req: Request, res: Response) => {
         .json({ status: "fail", message: "User not found" });
     }
 
-    if (!user.book || !Array.isArray(user.book)) {
-      return res
-        .status(404)
-        .json({ status: "fail", message: "Book collection not found" });
-    }
+    const oldbook = user.book.find((item) => item.bookId === bookId);
 
-    const bookArr = user.book.find((item: any) => item.bookId === bookId);
-    if (!bookArr) {
-      return res.status(404).json({
-        status: "fail",
-        message: "Book not found in user's collection",
+    if (user.book.length === 0 || !oldbook) {
+      const newBook = {
+        bookId,
+        shelve,
+      };
+
+      user.book.push(newBook);
+      await user.save();
+
+      return res.status(200).json({
+        status: "success",
+        message: "Your Book is added successfully ",
       });
     }
 
-    bookArr.shelve = shelve;
+    oldbook.shelve = shelve;
     await user.save();
 
     res.json({ status: "success", data: user });
@@ -145,8 +140,10 @@ const bookStatusController = async (req: Request, res: Response) => {
   }
 };
 
-const getBook = async (req: Request, res: Response) => {
+const getBook = async (req, res) => {
   const bookId = req.params.bookId;
+  console.log(bookId);
+
   try {
     const book = await Books.findById(bookId);
 
@@ -160,7 +157,7 @@ const getBook = async (req: Request, res: Response) => {
   }
 };
 
-const adminController = async (req: Request, res: Response) => {
+const adminController = async (req, res) => {
   const { email, password } = req.body;
   const user = await AdminModel.findOne({ email, password });
 
@@ -171,7 +168,7 @@ const adminController = async (req: Request, res: Response) => {
   }
 };
 
-const generateTokenResponse = (user: any) => {
+const generateTokenResponse = (user) => {
   const token = jwt.sign({ email: user.email }, "someRandomText", {
     expiresIn: "30d",
   });
@@ -179,7 +176,7 @@ const generateTokenResponse = (user: any) => {
   return user;
 };
 
-export default {
+module.exports = {
   loginController,
   registerController,
   bookStatusController,

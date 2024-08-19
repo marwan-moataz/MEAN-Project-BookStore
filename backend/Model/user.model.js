@@ -17,7 +17,7 @@
 //   book: any;
 // }
 
-// export const UserSchema = new Schema<User>(
+// export const UserSchema = new Schema(
 //   {
 //     name: { type: String, required: true },
 //     email: { type: String, Number, required: true, unique: true },
@@ -37,44 +37,42 @@
 //   }
 // );
 
-// export const UserModel = model<User>("User", UserSchema);
+// export const UserModel = model("User", UserSchema);
 
-import { Schema, model } from "mongoose";
+const { Schema, model } = require("mongoose");
 
 // Define the userBook interface
-export interface userBook {
-  bookId: string;
-  shelve: "read" | "want to read" | "reading" | null;
-  rating: number;
-  comment: string;
-}
+// export interface userBook {
+//   bookId: string;
+//   shelve: "read" | "want to read" | "reading" | null;
+//   rating: number;
+//   comment: string;
+// }
 
-// Define the User interface
-export interface User {
-  id: string;
-  email: string;
-  password: any;
-  confirmPassword: string;
-  name: string;
-  profilePicture: string;
-  isAdmin: boolean;
-  book: userBook[]; // Define the book field as an array of userBook objects
-}
+// // Define the User interface
+// export interface User {
+//   id: string;
+//   email: string;
+//   password: any;
+//   confirmPassword: string;
+//   name: string;
+//   profilePicture: string;
+//   isAdmin: boolean;
+//   book: userBook[]; // Define the book field as an array of userBook objects
+// }
 
 // Define the schema for userBook
-const userBookSchema = new Schema<userBook>({
-  bookId: { type: String, required: true },
+const userBookSchema = new Schema({
+  bookId: { type: String },
   shelve: {
     type: String,
     enum: ["read", "want to read", "reading", null],
     default: null,
   },
-  rating: { type: Number, default: 0 },
-  comment: { type: String, default: "" },
 });
 
 // Define the schema for User
-export const UserSchema = new Schema<User>(
+const UserSchema = new Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
@@ -96,4 +94,6 @@ export const UserSchema = new Schema<User>(
 );
 
 // Create and export the UserModel
-export const UserModel = model<User>("User", UserSchema);
+const UserModel = model("User", UserSchema);
+
+module.exports = { UserModel };

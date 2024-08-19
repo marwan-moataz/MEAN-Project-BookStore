@@ -43,6 +43,7 @@ const getAllBooks = async (req, res) => {
 
 const getBookById = async (req, res) => {
   const bookId = req.params.bookId;
+
   try {
     const book = await Books.find({ _id: bookId });
 
@@ -52,6 +53,8 @@ const getBookById = async (req, res) => {
       res.json({ status: "success", data: { book } });
     }
   } catch (err) {
+    console.log(err);
+
     res.status(500).json({ status: "error", message: "incorrect Id Format" });
   }
 };

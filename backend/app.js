@@ -1,10 +1,13 @@
 require("dotenv").config();
+
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
 const booksRouter = require("./Routes/books.route");
 const categoriesRouter = require("./Routes/categories.route");
+const userRouter = require("./Routes/user.route");
+const adminRouter = require("./Routes/admin.route");
 
 const app = express();
 
@@ -18,6 +21,8 @@ app.use(express.json());
 
 app.use("/api/books", booksRouter);
 app.use("/api/categories", categoriesRouter);
+app.use("/", userRouter);
+app.use("/", adminRouter);
 
 app.listen(process.env.PORT, () => {
   console.log("listening on port " + process.env.PORT);

@@ -5,7 +5,7 @@ import {
   FormArray,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { UserServicesService } from '../../services/user.services.service';
+import { UserServicesService } from '../../services/user.services';
 import { NgFor } from '@angular/common';
 import { AdminBooksPageComponent } from '../admin-books-page/admin-books-page.component';
 import { AdminTableComponent } from '../user-table/admin-table.component';
@@ -25,8 +25,7 @@ import { userTableData } from '../../shared/interfaces/IuserTableData';
 })
 export class UserBooksComponent implements OnInit {
   booksForm!: FormGroup;
-
-  currentUser = this.userService.currentUser;
+  currentUser: any;
   tableData: any[] = [];
   tableHeader: string[] = [
     'Cover',
@@ -43,6 +42,7 @@ export class UserBooksComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.currentUser = this.userService.currentUser;
     this.initForm();
     this.loadUserBooks();
     this.currentUser.book.forEach((book: any) => {
@@ -50,7 +50,7 @@ export class UserBooksComponent implements OnInit {
         .getSingleBooks(book.bookId)
         .subscribe((response: any) => {
           this.tableData.push({
-            ...response.data.book,
+            ...response.data.book[0],
             rating: book.rating,
             shelve: book.shelve,
           });
