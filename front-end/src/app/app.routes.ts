@@ -11,6 +11,9 @@ import { AdminLoginComponent } from './components/admin-login/admin-login.compon
 import { AdminTableComponent } from './components/user-table/admin-table.component';
 import { UserBooksComponent } from './components/user-profile/user-profile.component';
 import { FavoriteBooksComponent } from './components/favorite-books/favorite-books.component';
+import { UserAuthorsComponent } from './components/user-authors/user-authors.component';
+import { SingleAuthorComponent } from './components/user-authors/single-author/single-author.component';
+import { AdminAuthorsComponent } from './components/admin-authors/admin-authors.component';
 
 export const routes: Routes = [
   { path: 'admin/books', component: AdminBooksPageComponent },
@@ -41,4 +44,7 @@ export const routes: Routes = [
     component: RegisterPageComponent,
     title: 'Register Page',
   },
+  { path: 'authors', component: UserAuthorsComponent },
+  { path: 'authors/:authorId', component: SingleAuthorComponent },
+  { path: 'admin/authors', component: AdminAuthorsComponent },
 ];
