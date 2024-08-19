@@ -31,7 +31,12 @@ export class AdminCategoriesPageComponent {
 
   constructor(private categoryService: CategoryService) {}
   ngOnInit(): void {
-    this.getCategories();
+    const userToken = JSON.parse(sessionStorage.getItem('User')!);
+    if (!userToken || !userToken.isAdmin) {
+      alert('Please login to access this page');
+      window.location.href = '/admin';
+      return;
+    } else this.getCategories();
   }
   getCategories(action?: 'nxt' | 'prev'): void {
     if (action === 'nxt') {

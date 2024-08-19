@@ -12,10 +12,10 @@ export class CategoryService {
 
   constructor(private http: HttpClient, private loaderService: LoaderService) {}
 
-  getCategories(page: number = 1, limit: number = 5): Observable<Category[]> {
+  getCategories(page: number = 1, limit: number = 5): Observable<any> {
     this.loaderService.show();
     return this.http
-      .get<Category[]>(this.apiUrl + `?limit=${limit}&page=${page}`)
+      .get<any>(this.apiUrl + `?limit=${limit}&page=${page}`)
       .pipe(finalize(() => this.loaderService.hide()));
   }
 

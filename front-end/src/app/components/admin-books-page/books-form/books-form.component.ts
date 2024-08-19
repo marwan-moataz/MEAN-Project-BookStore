@@ -3,6 +3,8 @@ import { Component, Input } from '@angular/core';
 import { BookService } from '../../../services/book.service';
 import { Book } from '../../../models/book.model';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { AuthorService } from '../../../services/author.service';
+import { CategoryService } from '../../../services/category.service';
 
 @Component({
   selector: 'app-books-form',
@@ -70,13 +72,31 @@ export class BooksFormComponent {
   bookAuthor = new FormControl('');
   bookCategory = new FormControl('');
   bookPhoto = new FormControl('');
-  constructor(private bookService: BookService) {}
+
+  constructor(
+    private bookService: BookService,
+    private authorService: AuthorService,
+    private categoryService: CategoryService
+  ) {}
 
   ngOnInit(): void {
     this.bookName.setValue(this.book.name!);
     this.bookAuthor.setValue(this.book.author! || 'Select Author');
     this.bookCategory.setValue(this.book.category! || 'Select Category');
     this.bookPhoto.setValue(this.book.photo!);
+    this.getAuthorsList();
+    this.getCategoriesList();
+  }
+
+  getAuthorsList() {
+    return this.authorService.getAuthors().subscribe((response) => {
+      this.authorList = { ...response.data.authors };
+    });
+  }
+  getCategoriesList() {
+    return this.categoryService.getCategories().subscribe((response) => {
+      this.categoryList = { ...response.data };
+    });
   }
 
   insertBook(book: any): void {

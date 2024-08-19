@@ -41,14 +41,14 @@ export class AdminBooksPageComponent {
   ];
   constructor(private bookService: BookService) {}
   ngOnInit(): void {
-    this.getBooks();
+    const userToken = JSON.parse(sessionStorage.getItem('User')!);
+    if (!userToken || !userToken.isAdmin) {
+      alert('Please login to access this page');
+      window.location.href = '/admin';
+      return;
+    } else this.getBooks();
   }
-  getBooks(action?: 'nxt' | 'prev'): void {
-    if (action === 'nxt') {
-      this.currentPage++;
-    } else if (action === 'prev') {
-      this.currentPage--;
-    }
+  getBooks(): void {
     this.bookService
       .getBooks(this.currentPage, this.pageSize)
       .subscribe((data: any) => {

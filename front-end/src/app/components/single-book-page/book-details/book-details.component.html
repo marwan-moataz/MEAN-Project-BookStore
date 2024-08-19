@@ -38,9 +38,11 @@
       </div>
     </div>
     <select
+      *ngIf="isLoggedIn"
       class="form-select my-3 mx-auto w-75 border border-primary"
       aria-label="Default select example"
       [formControl]="bookStatus"
+      (change)="onBookStatusChanged()"
     >
       <option value="null" hidden selected>Choose Your Book Status</option>
       <option value="want to read" selected>Want to read</option>
