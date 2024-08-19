@@ -1,0 +1,70 @@
+<!-- <div class="container mt-5">
+  <div class="header">
+    <h1>Authors</h1>
+    <a ><i class='bx bxs-add-to-queue' ></i></a>
+  </div>
+  <table class="table table-hover table-group-divider text-center justify-content-center align-content-center">
+    <thead >
+      <tr >
+        <th scope="col">#</th>
+        <th scope="col">Photo</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Date Of Birth</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (author of authors; track $index) {
+      <tr>
+        <th>{{$index+1}}</th>
+        <th><img [src]="author.photo" alt="" style="width:90px;"></th>
+        <th>{{author.firstName}}</th>
+        <th>{{author.lastName}}</th>
+        <th>{{author.dateOfBirth}}</th>
+        <th class="actions">
+          <a ><i class='bx bxs-edit-alt' ></i></a>
+          <a (click)="deleteAuthor(author._id)"><i class='bx bxs-trash-alt' ></i></a>
+        </th>
+      </tr>
+    }
+    </tbody>
+  </table>
+
+</div> -->
+
+
+<div class="container mt-5">
+  <div class="header">
+    <app-admin-navigation></app-admin-navigation>
+    <a (click)="openDialog()"><i class='bx bxs-add-to-queue'></i></a>
+  </div>
+  <table class="table table-hover table-group-divider text-center">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Photo</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Date Of Birth</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let author of authors; index as i">
+        <td>{{i + 1}}</td>
+        <td><img [src]="author.photo" alt="" style="width:90px;"></td>
+        <td>{{author.firstName}}</td>
+        <td>{{author.lastName}}</td>
+        <td>{{author.dateOfBirth}}</td>
+        <td class="actions">
+          <a (click)="openDialog(author)"><i class='bx bxs-edit-alt'></i></a>
+          <a (click)="deleteAuthor(author._id)"><i class='bx bxs-trash-alt'></i></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+</div>
+
