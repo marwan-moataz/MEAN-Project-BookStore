@@ -1,0 +1,50 @@
+@if(author){
+
+  <div class="container mt-5 ">
+    <div class="Author">
+      <div class="d-inline-flex p-2">
+        <img [src]="author.photo" class="img-fluid me-5" style="width: 250px;">
+        <div class="content">
+          <h3>{{author.firstName}} {{author.lastName}}</h3>
+          <h5>{{(author.dateOfBirth)}}</h5>
+          <p>A great Author whose books have influenced so many people through time and still will.</p>
+        </div>
+      </div>
+    </div>
+
+
+      <div class="authors-books">
+        <h3>Author's Books</h3>
+        @for (book of auhtorBooks; track $index) {
+          <div class=" book">
+
+            <div class="right">
+              <img [src]="book.photo" alt="">
+              <div class="right-content">
+                <p>{{book.name}}</p>
+                <div class="rating">
+                  <p-rating [(ngModel)]="book.averageRating" [readonly]="true" [cancel]="false"/>
+                  <span>{{book.averageRating}}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="left">
+              <div class="select">
+                <p-treeSelect
+                  class="md:w-20rem w-full"
+                  containerStyleClass="w-full"
+                  [(ngModel)]="selectedOption"
+                  [options]="options"
+                  placeholder="Select Item"/>
+              </div>
+          </div>
+          </div>
+
+          <hr >
+        }
+
+      </div>
+    </div>
+
+}

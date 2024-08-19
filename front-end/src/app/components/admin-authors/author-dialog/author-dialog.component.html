@@ -1,0 +1,34 @@
+<div class="container">
+  <h2 mat-dialog-title>{{data ? 'Update Author' : 'Create Author'}}</h2>
+  <form [formGroup]="authorForm" (ngSubmit)="onSubmit()">
+    <mat-dialog-content>
+      <mat-form-field appearance="fill">
+        <mat-label>Image</mat-label>
+        <input matInput formControlName="photo">
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="fill">
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstName">
+      </mat-form-field>
+      <br>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName">
+      </mat-form-field>
+      <br>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Date of Birth</mat-label>
+        <input matInput formControlName="dateOfBirth">
+      </mat-form-field>
+      <br>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-button (click)="onCancel()">Cancel</button>
+      <button mat-button type="submit" color="primary">{{data ? 'Update' : 'Create'}}</button>
+    </mat-dialog-actions>
+  </form>
+</div>
+

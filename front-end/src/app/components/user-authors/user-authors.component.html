@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row mt-5">
+    @for (author of authors; track $index) {
+      <div class="col-3 ">
+        <div class="card1">
+          <img [src]="author.photo" alt="photo">
+          <div >
+            <h5><a [routerLink]="['/authors', author._id]">{{author.firstName}} {{author.lastName}}</a></h5>
+          </div>
+        </div>
+      </div>
+    }
+
+  </div>
+
+  <!-- <p-paginator
+    (onPageChange)="onPageChange($event)"
+    [first]="first"
+    [rows]="rows"
+    [totalRecords]="120"
+    [rowsPerPageOptions]="[10, 20, 30]" /> -->
+
+
+</div>
