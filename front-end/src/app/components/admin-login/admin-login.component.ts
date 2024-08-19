@@ -18,7 +18,7 @@ import { AdminService } from '../../services/admin.service';
 export class AdminLoginComponent {
   adminLoginForm!: FormGroup;
   isSubmitted = false;
-  returnUrl = '';
+  returnUrl = '/admin/books';
   constructor(
     private formBuilder: FormBuilder,
     private adminService: AdminService,
@@ -31,7 +31,8 @@ export class AdminLoginComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
-    this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'];
+    this.returnUrl =
+      this.activatedRoute.snapshot.queryParams['returnUrl'] || this.returnUrl;
   }
 
   get fc() {
@@ -49,7 +50,9 @@ export class AdminLoginComponent {
       })
       .subscribe({
         next: () => {
-          this.router.navigateByUrl(this.returnUrl);
+          this.router.navigateByUrl(this.returnUrl).then(() => {
+            window.location.reload(); // Reload the page after navigation
+          });
         },
         error: () => {},
       });

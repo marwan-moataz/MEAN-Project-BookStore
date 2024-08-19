@@ -9,7 +9,6 @@ import { UserServicesService } from '../../services/user.services';
 import { NgFor } from '@angular/common';
 import { AdminBooksPageComponent } from '../admin-books-page/admin-books-page.component';
 import { AdminTableComponent } from '../user-table/admin-table.component';
-import { userTableData } from '../../shared/interfaces/IuserTableData';
 
 @Component({
   standalone: true,
@@ -23,7 +22,7 @@ import { userTableData } from '../../shared/interfaces/IuserTableData';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css'],
 })
-export class UserBooksComponent implements OnInit {
+export class UserProfileComponent implements OnInit {
   booksForm!: FormGroup;
   currentUser: any;
   tableData: any[] = [];
@@ -54,8 +53,8 @@ export class UserBooksComponent implements OnInit {
             rating: book.rating,
             shelve: book.shelve,
           });
+          console.log(this.tableData);
         });
-      console.log(this.tableData);
     });
   }
 
@@ -94,6 +93,104 @@ export class UserBooksComponent implements OnInit {
     console.log(this.currentUser);
   }
 }
+////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////
+
+// import { Component, OnInit } from '@angular/core';
+// import {
+//   FormBuilder,
+//   FormGroup,
+//   FormArray,
+//   ReactiveFormsModule,
+// } from '@angular/forms';
+// import { UserServicesService } from '../../services/user.services';
+// import { NgFor } from '@angular/common';
+// import { AdminBooksPageComponent } from '../admin-books-page/admin-books-page.component';
+// import { AdminTableComponent } from '../user-table/admin-table.component';
+
+// @Component({
+//   standalone: true,
+//   imports: [
+//     ReactiveFormsModule,
+//     NgFor,
+//     AdminBooksPageComponent,
+//     AdminTableComponent,
+//   ],
+//   selector: 'app-user-books',
+//   templateUrl: './user-profile.component.html',
+//   styleUrls: ['./user-profile.component.css'],
+// })
+// export class UserBooksComponent implements OnInit {
+//   booksForm!: FormGroup;
+//   currentUser: any;
+//   tableData: any[] = [];
+//   tableHeader: string[] = [
+//     'Cover',
+//     'Name',
+//     'Author',
+//     'AvgRate',
+//     'Rating',
+//     'Shelve',
+//   ];
+
+//   constructor(
+//     private fb: FormBuilder,
+//     private userService: UserServicesService
+//   ) {}
+
+//   ngOnInit(): void {
+//     this.currentUser = this.userService.currentUser;
+//     this.initForm();
+//     this.loadUserBooks();
+//   }
+
+//   initForm() {
+//     this.booksForm = this.fb.group({
+//       books: this.fb.array([]),
+//     });
+//   }
+
+//   get books(): FormArray {
+//     return this.booksForm.get('books') as FormArray;
+//   }
+
+//   loadUserBooks() {
+//     // Clear previous data
+//     this.tableData = [];
+//     this.books.clear();
+
+//     // Fetch books data from the user's book collection
+//     this.currentUser.book.forEach((book: any) => {
+//       this.userService
+//         .getSingleBooks(book.bookId)
+//         .subscribe((response: any) => {
+//           const bookData = {
+//             ...response.data.book[0],
+//             rating: book.rating,
+//             shelve: book.shelve,
+//           };
+//           this.tableData.push(bookData);
+
+//           // Add book to the FormArray
+//           this.books.push(
+//             this.fb.group({
+//               _id: [bookData._id],
+//               name: [bookData.name],
+//               author: [bookData.author],
+//               avgRate: [bookData.avgRate],
+//               rating: [bookData.rating],
+//               shelve: [bookData.shelve],
+//             })
+//           );
+//         });
+//     });
+//   }
+
+//   onStatusChange() {
+//     this.loadUserBooks();
+//   }
+// }
 
 // updateBookStatus(index: any, shelves: any) {
 //   const selectedBook = this.books.at(index);

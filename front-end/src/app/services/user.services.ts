@@ -43,11 +43,6 @@ export class UserServicesService {
       })
     );
   }
-  // updateBookStatus(bookId: string, newStatus: string): Observable<any> {
-  //   return this.http.patch(`http://localhost:3333/books/${bookId}/status`, {
-  //     shelve: newStatus,
-  //   });
-  // }
   updateBookStatus(
     bookId: string,
     newStatus: string,
@@ -92,8 +87,9 @@ export class UserServicesService {
   }
 
   logOut() {
-    this.userSubject.next(new User());
     localStorage.removeItem(USER_KEY);
+    this.userSubject.next(new User());
+    localStorage.removeItem('userId');
   }
 
   private setUserToLocalStorage(user: User) {
@@ -114,26 +110,4 @@ export class UserServicesService {
     if (userJson) return JSON.parse(userJson) as User;
     return new User();
   }
-  // private userSubject = new BehaviorSubject<User>(new User());
-  // public userObservable: Observable<User>;
-  // constructor(private http: HttpClient, private toastrService: ToastrService) {
-  //   this.userObservable = this.userSubject.asObservable();
-  // }
-
-  // login(userLogin: IUserLogin): Observable<User> {
-  //   return this.http.post<User>(USER_LOGIN_URL, userLogin).pipe(
-  //     tap({
-  //       next: (user) => {
-  //         this.userSubject.next(user);
-  //         this.toastrService.success(
-  //           `welcome ${user.name}`,
-  //           `Login Successful`
-  //         );
-  //       },
-  //       error: (errorResponse) => {
-  //         this.toastrService.error(errorResponse.error, `Login`);
-  //       },
-  //     })
-  //   );
-  // }
 }
