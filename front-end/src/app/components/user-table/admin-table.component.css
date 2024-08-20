@@ -1,0 +1,16 @@
+.hover {
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
+
+.hover:hover {
+  transform: scale(1.1);
+}
+
+div.hover:hover {
+  text-decoration: none;
+  transform: scale(1.05);
+  font-weight: 500;
+}

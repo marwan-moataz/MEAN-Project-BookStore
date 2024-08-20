@@ -4,6 +4,8 @@ const router = express.Router();
 
 router.post("/login", controller.loginController);
 
+router.get("/user/:userId", controller.getUser);
+
 router.post("/register", controller.registerController);
 
 router.patch("/books/:userId/status", controller.bookStatusController);

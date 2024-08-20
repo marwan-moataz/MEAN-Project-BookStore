@@ -68,14 +68,22 @@
       <th scope="row">{{ i + 1 }}</th>
       <td *ngIf="item.photo">
         <img
+          class="hover"
           style="max-height: 200px; max-width: 100px"
           [src]="item.photo"
+          routerLink="/books/{{ item._id }}"
           alt="book image"
         />
       </td>
-      <td>{{ item.author }}</td>
+      <td>
+        <div routerLink="/books/{{ item._id }}" class="hover">
+          {{ item.name }}
+        </div>
+      </td>
+      <td>
+        <div routerLink="" class="hover">{{ item.author }}</div>
+      </td>
       <td *ngIf="item.photo">{{ item.averageRating }}</td>
-      <td *ngIf="item.photo">{{ item.rating }}</td>
       <td class="w-25">
         <select
           class="form-select w-50"

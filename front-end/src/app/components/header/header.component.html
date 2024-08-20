@@ -16,35 +16,23 @@
     </button>
     <div class="collapse navbar-collapse ms-5" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        @if (user.token) {
+        @if (!user.isAdmin) {
         <li class="nav-item">
           <a
             class="nav-link active"
             aria-current="page"
             href="#"
             routerLink="/userProfile"
+            *ngIf="user.email"
             >Home</a
           >
         </li>
-        } @else {
-        <li class="nav-item">
-          <a
-            class="nav-link active"
-            aria-current="page"
-            href="#"
-            routerLink="/login"
-            >Home</a
-          >
-        </li>
-        } @if (user.token) {
         <li class="nav-item">
           <a class="nav-link" href="#" routerLink="/categories">Categories</a>
         </li>
-        } @if (user.token) {
         <li class="nav-item">
           <a class="nav-link" href="#" routerLink="/books">Books</a>
         </li>
-        } @if (user.token) {
         <li class="nav-item">
           <a class="nav-link" href="#" routerLink="/authors">Authors</a>
         </li>
@@ -53,7 +41,7 @@
       <form class="d-flex justify-content-between" role="search">
         @if (!user.email) {
         <button class="btn login ms-3" routerLink="/login">Login</button>
-        } @if (user.isAdmin && user.email) {
+        } @if (user.email && user.isAdmin) {
         <div class="username" routerLink="/admin/books">
           Admin
           <div class="profile-picture">
@@ -69,7 +57,7 @@
           routerLink="/admin"
         >
           Logout</button
-        >} @else if (user.token) {
+        >} @else if (user.email) {
 
         <div class="username" *ngIf="user.email" routerLink="/userProfile">
           {{ user.name }}
@@ -86,7 +74,7 @@
         </button>
         } @if (!user.isAdmin && !user.token) {
         <button
-          *ngIf="!user.token"
+          *ngIf="!user.email"
           class="btn signup ms-3"
           routerLink="/register"
           type="submit"

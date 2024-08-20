@@ -10,17 +10,28 @@ import { RegisterPageComponent } from './components/register-page/register-page.
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { AdminTableComponent } from './components/user-table/admin-table.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import { FavoriteBooksComponent } from './components/favorite-books/favorite-books.component';
 import { UserAuthorsComponent } from './components/user-authors/user-authors.component';
 import { SingleAuthorComponent } from './components/user-authors/single-author/single-author.component';
 import { AdminAuthorsComponent } from './components/admin-authors/admin-authors.component';
 
 export const routes: Routes = [
-  { path: 'admin/books', component: AdminBooksPageComponent },
-  { path: 'admin/categories', component: AdminCategoriesPageComponent },
+  {
+    path: 'admin/books',
+    component: AdminBooksPageComponent,
+    title: 'Admin Books',
+  },
+  {
+    path: 'admin/categories',
+    component: AdminCategoriesPageComponent,
+    title: 'Admin Categories',
+  },
 
-  { path: 'books', component: UsersBookPageComponent },
-  { path: 'categories', component: UserCategoriesPageComponent },
+  { path: 'books', component: UsersBookPageComponent, title: 'Books' },
+  {
+    path: 'categories',
+    component: UserCategoriesPageComponent,
+    title: 'Categories',
+  },
   {
     path: 'categories/:category',
     component: UserSingleCategoryPageComponent,
@@ -35,12 +46,7 @@ export const routes: Routes = [
   {
     path: 'userProfile',
     component: UserProfileComponent,
-    title: 'user profile',
-  },
-  {
-    path: 'favoriteBooks',
-    component: FavoriteBooksComponent,
-    title: 'user profile',
+    title: 'User Profile',
   },
 
   {
@@ -48,7 +54,16 @@ export const routes: Routes = [
     component: RegisterPageComponent,
     title: 'Register Page',
   },
-  { path: 'authors', component: UserAuthorsComponent },
-  { path: 'authors/:authorId', component: SingleAuthorComponent },
-  { path: 'admin/authors', component: AdminAuthorsComponent },
+  { path: 'authors', component: UserAuthorsComponent, title: 'Authors' },
+  {
+    path: 'authors/:authorId',
+    component: SingleAuthorComponent,
+    title: 'Author Details',
+  },
+  {
+    path: 'admin/authors',
+    component: AdminAuthorsComponent,
+    title: 'Authors Control Panel',
+  },
+  { path: '**', component: UserProfileComponent, title: 'Home' },
 ];

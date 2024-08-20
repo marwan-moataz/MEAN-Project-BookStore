@@ -40,16 +40,16 @@ export class AdminService {
 
   logOut() {
     this.adminSubject.next(new Admin());
-    sessionStorage.removeItem(USER_KEY);
+    localStorage.removeItem(USER_KEY);
     window.location.reload();
   }
 
   private setAdminToLocalStorage(user: Admin) {
-    sessionStorage.setItem(USER_KEY, JSON.stringify(user));
+    localStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
   private getAdminFromLocalStorage(): Admin {
-    const userJson = sessionStorage.getItem(USER_KEY);
+    const userJson = localStorage.getItem(USER_KEY);
     if (userJson) return JSON.parse(userJson) as Admin;
     return new Admin();
   }

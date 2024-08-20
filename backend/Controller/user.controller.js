@@ -29,6 +29,23 @@ const loginController = async (req, res) => {
   }
 };
 
+const getUser = async (req, res) => {
+  const userId = req.params.userId;
+  console.log(userId);
+
+  try {
+    const user = await UserModel.findById(userId);
+
+    if (!user) {
+      res.json({ status: "fail", data: { user }, message: "user not found" });
+    } else {
+      res.json({ status: "success", data: { user } });
+    }
+  } catch (err) {
+    res.status(500).json({ status: "error", message: "incorrect Id Format" });
+  }
+};
+
 const strongPasswordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
 const validatePassword = (password) => {
@@ -182,4 +199,5 @@ module.exports = {
   bookStatusController,
   getBook,
   adminController,
+  getUser,
 };

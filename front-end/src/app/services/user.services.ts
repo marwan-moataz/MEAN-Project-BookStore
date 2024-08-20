@@ -54,6 +54,10 @@ export class UserServicesService {
     });
   }
 
+  getUser(userId: string): Observable<any> {
+    return this.http.get(`http://localhost:3333/user/${userId}`);
+  }
+
   getBooksByShelve(shelve: string): Observable<any> {
     return this.http.get(`http://localhost:3333/books?shelve=${shelve}`);
   }
