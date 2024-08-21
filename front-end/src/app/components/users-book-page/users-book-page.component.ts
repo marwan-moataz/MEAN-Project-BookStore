@@ -19,8 +19,7 @@ export class UsersBookPageComponent {
 
   pageSize: number = 6;
   books: Book[] = [];
-  constructor(private bookService: BookService) {}
-  ngOnInit(): void {
+  constructor(private bookService: BookService) {
     this.getBooks();
   }
   getBooks(): void {

@@ -22,51 +22,9 @@ export class BooksFormComponent {
     photo: '',
   };
   @Input() formActionType: string = 'Add';
-  categoryList: string[] = [
-    'Fiction',
-    'Non-Fiction',
-    'Mystery',
-    'Science Fiction',
-    'Fantasy',
-    'Historical',
-    'Romance',
-    'Thriller',
-    'Biography',
-    'Self-Help',
-    'Young Adult',
-    "Children's",
-    'Horror',
-    'Poetry',
-    'Graphic Novels',
-    'Classics',
-    'Philosophy',
-    'Science',
-    'Travel',
-    'Cookbooks',
-  ];
+  categoryList: string[] = [];
 
-  authorList: string[] = [
-    'J.K. Rowling',
-    'George R.R. Martin',
-    'J.R.R. Tolkien',
-    'Agatha Christie',
-    'Stephen King',
-    'Jane Austen',
-    'Mark Twain',
-    'Ernest Hemingway',
-    'F. Scott Fitzgerald',
-    'Harper Lee',
-    'Charles Dickens',
-    'Isaac Asimov',
-    'Arthur Conan Doyle',
-    'Leo Tolstoy',
-    'Gabriel Garcia Marquez',
-    'Virginia Woolf',
-    'Franz Kafka',
-    'Fyodor Dostoevsky',
-    'H.G. Wells',
-    'James Joyce',
-  ];
+  authorList: string[] = [];
 
   bookName = new FormControl('');
   bookAuthor = new FormControl('');
@@ -90,12 +48,12 @@ export class BooksFormComponent {
 
   getAuthorsList() {
     return this.authorService.getAuthors().subscribe((response) => {
-      this.authorList = { ...response.data.authors };
+      this.authorList = response.data.authors;
     });
   }
   getCategoriesList() {
     return this.categoryService.getCategories().subscribe((response) => {
-      this.categoryList = { ...response.data };
+      this.categoryList = response.data;
     });
   }
 

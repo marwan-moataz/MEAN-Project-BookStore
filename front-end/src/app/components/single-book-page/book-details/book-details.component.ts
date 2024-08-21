@@ -26,6 +26,26 @@ export class BookDetailsComponent {
   isLoggedIn = localStorage.getItem('User');
   bookStatus = new FormControl<string | null>(null);
 
+  getUserBookStatus = () => {
+    if (this.isLoggedIn) {
+      const userId = localStorage.getItem('userId')!;
+      let currentBook: any;
+
+      this.userService.getUser(userId).subscribe((response) => {
+        const userBooksArray = response.data.user.book;
+
+        currentBook = userBooksArray.find(
+          (book: any) => book.bookId === this.bookId
+        );
+        this.bookStatus.setValue(currentBook.shelve);
+      });
+    } else {
+      this.bookStatus.setValue(null);
+    }
+  };
+  ngOnInit(): void {
+    this.getUserBookStatus();
+  }
   onBookStatusChanged() {
     const userID = JSON.parse(localStorage.getItem('User')!).userId;
     this.userService

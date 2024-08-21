@@ -31,26 +31,21 @@
 //   }
 // }
 
-
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthorDialogComponent } from './author-dialog/author-dialog.component'; // Adjust path as needed
 import { AuthorService } from '../../services/author.service';
 import { Author } from '../../models/author.model';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from "../header/header.component";
-import { AdminNavigationComponent } from "../../shared/admin-navigation/admin-navigation.component";
+import { HeaderComponent } from '../header/header.component';
+import { AdminNavigationComponent } from '../../shared/admin-navigation/admin-navigation.component';
 
 @Component({
   selector: 'app-admin-authors',
   standalone: true,
-  imports: [
-    CommonModule,
-    HeaderComponent,
-    AdminNavigationComponent
-],
+  imports: [CommonModule, HeaderComponent, AdminNavigationComponent],
   templateUrl: './admin-authors.component.html',
-  styleUrls: ['./admin-authors.component.css']
+  styleUrls: ['./admin-authors.component.css'],
 })
 export class AdminAuthorsComponent {
   authors: Author[] = [];
@@ -61,7 +56,12 @@ export class AdminAuthorsComponent {
   ) {}
 
   ngOnInit(): void {
-    this.getAuthors();
+    const userToken = JSON.parse(localStorage.getItem('User')!);
+    if (!userToken || !userToken.isAdmin) {
+      alert('Please login to access this page');
+      window.location.href = '/admin';
+      return;
+    } else this.getAuthors();
   }
 
   getAuthors() {
@@ -72,10 +72,10 @@ export class AdminAuthorsComponent {
 
   openDialog(author?: Author): void {
     const dialogRef = this.dialog.open(AuthorDialogComponent, {
-      data: author || null
+      data: author || null,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         if (author) {
           // Update existing author
@@ -94,7 +94,7 @@ export class AdminAuthorsComponent {
 
   deleteAuthor(authorId: string): void {
     this.authorService.deleteAuthor(authorId).subscribe(() => {
-      this.authors = this.authors.filter(author => author._id !== authorId);
+      this.authors = this.authors.filter((author) => author._id !== authorId);
     });
   }
 }

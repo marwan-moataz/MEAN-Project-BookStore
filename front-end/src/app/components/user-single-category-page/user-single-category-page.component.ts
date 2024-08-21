@@ -3,11 +3,12 @@ import { SingleBookCardComponent } from '../users-book-page/single-book-card/sin
 import { Book } from '../../models/book.model';
 import { BookService } from '../../services/book.service';
 import { ActivatedRoute } from '@angular/router';
+import { NotFoundComponent } from '../../shared/not-found/not-found.component';
 
 @Component({
   selector: 'app-user-single-category-page',
   standalone: true,
-  imports: [SingleBookCardComponent],
+  imports: [SingleBookCardComponent, NotFoundComponent],
   templateUrl: './user-single-category-page.component.html',
   styleUrl: './user-single-category-page.component.css',
 })

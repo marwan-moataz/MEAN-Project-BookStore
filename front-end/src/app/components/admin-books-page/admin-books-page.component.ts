@@ -28,7 +28,7 @@ export class AdminBooksPageComponent {
   currentPage = 1;
   pageSize = 5;
   booksCount: number = 0;
-  moreBooks: boolean = false;
+  moreBooks!: boolean;
 
   books: Book[] | TableData[] = [];
   tableHeader: string[] = [
@@ -48,6 +48,11 @@ export class AdminBooksPageComponent {
       return;
     } else this.getBooks();
   }
+  ngAfterViewChecked(): void {
+    this.moreBooks =
+      this.pageSize * (this.currentPage - 1) + this.books.length <=
+      this.booksCount;
+  }
   getBooks(): void {
     this.bookService
       .getBooks(this.currentPage, this.pageSize)
@@ -55,9 +60,6 @@ export class AdminBooksPageComponent {
         this.books = data.data.books;
         this.booksCount = data.data.booksCount;
       });
-    this.moreBooks =
-      this.pageSize * (this.currentPage - 1) + this.books.length <=
-      this.booksCount;
   }
 
   nextBtnOnclick = () => {

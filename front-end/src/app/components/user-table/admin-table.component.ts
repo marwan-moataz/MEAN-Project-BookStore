@@ -52,7 +52,6 @@ export class AdminTableComponent implements OnInit, OnChanges {
       this.userService.getUser(userId).subscribe(
         (response: any) => {
           this.currentUser = response.data.user;
-          console.log(this.currentUser.book);
 
           // Populate table data with user's books
           this.populateTableData();
@@ -72,7 +71,6 @@ export class AdminTableComponent implements OnInit, OnChanges {
         ...book,
         // You can add more fields as needed
       }));
-      console.log(this.tableData);
     }
     this.fetchBookDetails();
   }
@@ -83,7 +81,6 @@ export class AdminTableComponent implements OnInit, OnChanges {
     this.tableData.forEach((book) => {
       this.userService.getSingleBooks(book.bookId).subscribe({
         next: (response: any) => {
-          console.log(this.tableData);
           if (response.status == 'success') {
             const detailedBook = {
               ...response.data.book[0],
@@ -120,8 +117,6 @@ export class AdminTableComponent implements OnInit, OnChanges {
     if (this.selectedFilter === 'all') {
       this.filteredTableData = [...this.detailedBookData];
     } else {
-      console.log(this.selectedFilter);
-
       this.filteredTableData = this.detailedBookData.filter(
         (book) => book.shelve === this.selectedFilter
       );
