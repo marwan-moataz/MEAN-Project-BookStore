@@ -53,44 +53,6 @@ export class RegisterPageComponent {
     return this.registerForm.controls;
   }
 
-  // onFileSelected(event: any) {
-  //   this.selectedFile = event.target.files[0];
-  // }
-
-  // onFileUpload() {
-  //   const imageBlob = this.fileInput.nativeElement.files[0];
-  //   const file = new FormData();
-  //   file.set('file', imageBlob);
-  //   this.http
-  //     .post('http://localhost:4000/register', file)
-  //     .subscribe((res) => console.log(res));
-  // }
-
-  // submit() {
-  //   this.isSubmitted = true;
-  //   if (this.registerForm.invalid) return;
-
-  //   const formData = new FormData();
-  //   const fv = this.registerForm.value;
-
-  //   // Append form fields to FormData
-  //   formData.append('name', fv.name);
-  //   formData.append('email', fv.email);
-  //   formData.append('password', fv.password);
-  //   formData.append('confirmPassword', fv.confirmPassword);
-  //   formData.append('profilePicture', fv.profilePicture);
-
-  //   // Append the selected file to FormData
-  //   // if (this.selectedFile) {
-  //   //   formData.append('profilePicture', this.selectedFile);
-  //   // }
-
-  //   // Send FormData object to the service
-  //   this.userService.register(formData).subscribe((_) => {
-  //     this.router.navigateByUrl(this.returnUrl);
-  //   });
-  // }
-
   submit() {
     this.isSubmitted = true;
     if (this.registerForm.invalid) return;
@@ -109,3 +71,41 @@ export class RegisterPageComponent {
     });
   }
 }
+
+// onFileSelected(event: any) {
+//   this.selectedFile = event.target.files[0];
+// }
+
+// onFileUpload() {
+//   const imageBlob = this.fileInput.nativeElement.files[0];
+//   const file = new FormData();
+//   file.set('file', imageBlob);
+//   this.http
+//     .post('http://localhost:4000/register', file)
+//     .subscribe((res) => console.log(res));
+// }
+
+// submit() {
+//   this.isSubmitted = true;
+//   if (this.registerForm.invalid) return;
+
+//   const formData = new FormData();
+//   const fv = this.registerForm.value;
+
+//   // Append form fields to FormData
+//   formData.append('name', fv.name);
+//   formData.append('email', fv.email);
+//   formData.append('password', fv.password);
+//   formData.append('confirmPassword', fv.confirmPassword);
+//   formData.append('profilePicture', fv.profilePicture);
+
+//   // Append the selected file to FormData
+//   // if (this.selectedFile) {
+//   //   formData.append('profilePicture', this.selectedFile);
+//   // }
+
+//   // Send FormData object to the service
+//   this.userService.register(formData).subscribe((_) => {
+//     this.router.navigateByUrl(this.returnUrl);
+//   });
+// }

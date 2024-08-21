@@ -53,6 +53,11 @@
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  cursor: pointer;
+}
+
+.book-by:hover {
+  text-decoration: underline;
 }
 
 .book-rate > label {

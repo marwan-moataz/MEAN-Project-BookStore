@@ -4,7 +4,9 @@
       <img [src]="bookData.photo" alt="" class="book-card-img" />
       <div class="card-content">
         <div class="book-name">{{ bookData.name }}</div>
-        <div class="book-by">by {{ bookData.author }}</div>
+        <div class="book-by" routerLink="/authors/{{ bookData.authorId }}">
+          by {{ bookData.author }}
+        </div>
         <div class="rating">
           <div class="d-flex flex-row-reverse align-items-center gap-2">
             <div>

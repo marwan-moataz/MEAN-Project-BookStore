@@ -17,7 +17,6 @@
     [tableData]="categories"
     adminPage="categories"
   ></app-admin-table>
-  <app-books-form [formActionType]="modalType"></app-books-form>
 
   <app-pagination
     [nextIsEnabled]="moreCategories"
@@ -26,4 +25,5 @@
     [previousBtnHandler]="previousBtnOnclick"
   ></app-pagination>
   <app-categories-form></app-categories-form>
+  <app-books-form [formActionType]="modalType"></app-books-form>
 </div>

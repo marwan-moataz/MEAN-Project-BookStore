@@ -86,36 +86,6 @@ const registerController = async (req, res) => {
   res.send(generateTokenResponse(dbUser));
 };
 
-// const bookStatusController = async (req, res) => {
-//   const { userId } = req.params;
-//   const { shelve, bookId } = req.body;
-
-//   try {
-//     let user = await UserModel.findById(userId);
-//     if (!user) {
-//       return res
-//         .status(404)
-//         .json({ status: "fail", message: "Book not found" });
-//     }
-//     console.log(user);
-
-//     const oldbook = user.book.find((item: any) => {
-//       item.bookId === bookId;
-//     });
-//     console.log(oldbook);
-
-//     user.book = oldbook;
-//     await user.save();
-
-//     res.json({ status: "success", data: user });
-//   } catch (err) {
-//     console.log(err);
-//     res
-//       .status(500)
-//       .json({ status: "error", message: "Error updating book status" });
-//   }
-// };
-
 const bookStatusController = async (req, res) => {
   const { userId } = req.params;
   const { shelve, bookId } = req.body;

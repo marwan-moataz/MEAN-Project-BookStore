@@ -3,11 +3,12 @@ import { Book } from '../../../models/book.model';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { UserServicesService } from '../../../services/user.services';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-book-details',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './book-details.component.html',
   styleUrl: './book-details.component.css',
 })

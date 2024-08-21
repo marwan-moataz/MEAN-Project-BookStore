@@ -38,6 +38,6 @@ export class NewReviewComponent {
           console.log(data);
         });
     });
-    location.reload();
+    window.location.reload();
   };
 }
