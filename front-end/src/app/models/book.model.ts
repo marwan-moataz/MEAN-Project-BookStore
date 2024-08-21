@@ -3,7 +3,9 @@ export interface Book {
   photo?: string;
   name?: string;
   category?: string;
+  categoryId?: string;
   author?: string;
+  authorId?: string;
   averageRating?: number;
   reviews?: BookReviews[];
 }

@@ -33,6 +33,8 @@ export class UserSingleCategoryPageComponent {
       .getCategoryBooks(this.currentPage, this.pageSize, this.category)
       .subscribe((data: any) => {
         this.books = data.data.books;
+        console.log(this.books);
+
         this.booksCount == 0 ? (this.booksCount = data.data.booksCount) : '';
       });
     this.moreBooks =

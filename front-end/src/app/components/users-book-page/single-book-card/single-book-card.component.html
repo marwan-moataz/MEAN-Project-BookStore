@@ -8,6 +8,6 @@
   ></div>
   <div class="bookinfo">
     <a class="title" (click)="showSingleBookPage()">{{ title }}</a>
-    <a class="author">{{ author }}</a>
+    <a class="author" [routerLink]="'/authors/' + authorId">{{ author }}</a>
   </div>
 </div>

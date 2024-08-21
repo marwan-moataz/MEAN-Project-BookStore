@@ -52,7 +52,7 @@
                 {{ book.category || "Select Category" }}
               </option>
               @for (item of categoryList; track $index) {
-              <option value="{{ item }}">{{ item }}</option>
+              <option value="{{ item.name }}">{{ item.name }}</option>
               }
             </select>
           </div>
@@ -73,7 +73,9 @@
                 {{ book.author || "Select Author" }}
               </option>
               @for (item of authorList; track $index) {
-              <option value="{{ item }}">{{ item }}</option>
+              <option value="{{ item.firstName + ' ' + item.lastName }}">
+                {{ item.firstName + " " + item.lastName }}
+              </option>
               }
             </select>
           </div>

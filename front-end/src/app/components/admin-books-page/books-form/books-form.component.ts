@@ -5,6 +5,8 @@ import { Book } from '../../../models/book.model';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AuthorService } from '../../../services/author.service';
 import { CategoryService } from '../../../services/category.service';
+import { Author } from '../../../models/author.model';
+import { Category } from '../../../models/category.model';
 
 @Component({
   selector: 'app-books-form',
@@ -22,9 +24,9 @@ export class BooksFormComponent {
     photo: '',
   };
   @Input() formActionType: string = 'Add';
-  categoryList: string[] = [];
 
-  authorList: string[] = [];
+  categoryList: Category[] = [];
+  authorList: Author[] = [];
 
   bookName = new FormControl('');
   bookAuthor = new FormControl('');
@@ -49,15 +51,16 @@ export class BooksFormComponent {
   getAuthorsList() {
     return this.authorService.getAuthors().subscribe((response) => {
       this.authorList = response.data.authors;
+      console.log(this.authorList);
     });
   }
   getCategoriesList() {
-    return this.categoryService.getCategories().subscribe((response) => {
+    return this.categoryService.getCategories(1, 100).subscribe((response) => {
       this.categoryList = response.data;
     });
   }
 
-  insertBook(book: any): void {
+  insertBook(book: Book): void {
     this.bookService.addBook(book).subscribe((data: any) => {
       console.log(data.status);
     });
@@ -76,11 +79,17 @@ export class BooksFormComponent {
 
   formSubmitHandler(event: Event): void {
     event.preventDefault();
-    const formData = {
-      name: this.bookName.value,
-      author: this.bookAuthor.value,
-      category: this.bookCategory.value,
-      photo: this.bookPhoto.value,
+    const formData: Book = {
+      name: this.bookName.value!,
+      author: this.bookAuthor.value!,
+      category: this.bookCategory.value!,
+      photo: this.bookPhoto.value!,
+      authorId: this.authorList.find(
+        (item) => item.firstName + ' ' + item.lastName == this.bookAuthor.value
+      )?._id,
+      categoryId: this.categoryList.find(
+        (item) => item.name == this.bookCategory.value
+      )?._id,
     };
 
     if (this.formActionType === 'Add') {
@@ -90,6 +99,6 @@ export class BooksFormComponent {
     } else if (this.formActionType === 'Delete') {
       this.deleteBook(this.book._id);
     }
-    location.reload();
+    // location.reload();
   }
 }

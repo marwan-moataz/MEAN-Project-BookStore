@@ -1,5 +1,4 @@
-
-.card1{
+.card1 {
   margin-bottom: 50px;
   width: 250px;
   max-height: 400px;
@@ -8,21 +7,24 @@
   box-shadow: 0 5px 8px rgba(0, 0.3, 0.3, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-  &:hover{
+  &:hover {
     transform: translateY(-10px) scale(1.02);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
-  img{
+  img {
     width: 250px;
     max-height: 250px;
     object-fit: cover;
   }
-  h5{
+  h5 {
     margin-left: 10px;
     margin-top: 10px;
-    a{
+    a {
       text-decoration: none;
       color: rgb(72, 72, 72);
     }
   }
+}
+.card1:hover {
+  cursor: pointer;
 }

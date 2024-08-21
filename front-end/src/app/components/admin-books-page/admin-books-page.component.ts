@@ -48,18 +48,17 @@ export class AdminBooksPageComponent {
       return;
     } else this.getBooks();
   }
-  ngAfterViewChecked(): void {
-    this.moreBooks =
-      this.pageSize * (this.currentPage - 1) + this.books.length <=
-      this.booksCount;
-  }
+
   getBooks(): void {
     this.bookService
       .getBooks(this.currentPage, this.pageSize)
       .subscribe((data: any) => {
         this.books = data.data.books;
-        this.booksCount = data.data.booksCount;
+        this.booksCount == 0 ? (this.booksCount = data.data.booksCount) : '';
       });
+    this.moreBooks =
+      this.pageSize * (this.currentPage - 1) + this.books.length <=
+      this.booksCount + 1;
   }
 
   nextBtnOnclick = () => {

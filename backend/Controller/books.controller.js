@@ -62,7 +62,7 @@ const getBookById = async (req, res) => {
 const getBookByAuthorId = async (req, res) => {
   const authorId = req.params.authorId;
   try {
-    const books = await Books.find({ author: authorId });
+    const books = await Books.find({ authorId: authorId });
 
     if (books.length == 0) {
       res.json({ status: "fail", data: { books }, message: "book not found" });

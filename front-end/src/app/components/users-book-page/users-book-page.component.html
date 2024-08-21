@@ -8,6 +8,7 @@
       [photo]="item.photo!"
       [author]="item.author!"
       [title]="item.name!"
+      [authorId]="item.authorId!"
     ></app-single-book-card>
     }@empty {
     <h1 class="d-block mx-auto display-3 mt-5 text-danger">Empty Shelfs</h1>
@@ -21,8 +22,6 @@
     [previousBtnHandler]="previousBtnOnclick"
   ></app-pagination>
   }@else {
-  <h1 class="d-block mx-auto display-3 mt-5 text-danger">
-    The Store is Under Maintenance
-  </h1>
+  <app-not-found />
   }
 </div>

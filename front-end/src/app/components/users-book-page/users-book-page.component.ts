@@ -4,11 +4,17 @@ import { Book } from '../../models/book.model';
 import { BookService } from '../../services/book.service';
 import { CommonModule } from '@angular/common';
 import { PaginationComponent } from '../../shared/pagination/pagination.component';
+import { NotFoundComponent } from '../../shared/not-found/not-found.component';
 
 @Component({
   selector: 'app-users-book-page',
   standalone: true,
-  imports: [SingleBookCardComponent, CommonModule, PaginationComponent],
+  imports: [
+    SingleBookCardComponent,
+    CommonModule,
+    PaginationComponent,
+    NotFoundComponent,
+  ],
   templateUrl: './users-book-page.component.html',
   styleUrl: './users-book-page.component.css',
 })

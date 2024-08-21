@@ -1,4 +1,4 @@
-import { Component, Input , NgModule} from '@angular/core';
+import { Component, Input, NgModule } from '@angular/core';
 import { AuthorService } from '../../../services/author.service';
 import { Author } from '../../../models/author.model';
 import { ActivatedRoute } from '@angular/router';
@@ -6,50 +6,59 @@ import { books } from './books';
 import { RatingModule } from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
 import { TreeSelectModule } from 'primeng/treeselect';
-
+import { BookService } from '../../../services/book.service';
+import { Book } from '../../../models/book.model';
 
 @Component({
   selector: 'app-single-author',
   standalone: true,
-  imports: [RatingModule,FormsModule,TreeSelectModule],
+  imports: [RatingModule, FormsModule, TreeSelectModule],
   templateUrl: './single-author.component.html',
-  styleUrl: './single-author.component.css'
+  styleUrl: './single-author.component.css',
 })
 export class SingleAuthorComponent {
   // @Input() authorId : any;
   author: Author | undefined;
-  auhtorBooks = books;
+  auhtorBooks: Book[] = [];
 
   //for the select
   options: any[] = [
     {
       label: 'Currently Reading',
-      value: 'currently_reading'
+      value: 'reading',
     },
     {
       label: 'Want to Read',
-      value: 'want_to_read'
+      value: 'want to read',
     },
     {
       label: 'Read',
-      value: 'read'
-    }
+      value: 'read',
+    },
   ];
 
-  selectedOption: any;   //the value of the select
+  selectedOption: any; //the value of the select
 
-  constructor(private route:ActivatedRoute, private authorService:AuthorService){
-  }
+  constructor(
+    private route: ActivatedRoute,
+    private authorService: AuthorService,
+    private bookService: BookService
+  ) {}
   ngOnInit(): void {
     this.getAuthor();
-    // this.auhtorBooks = books;
   }
 
-  getAuthor(){
-    const id =String(this.route.snapshot.paramMap.get('authorId'));
-    this.authorService.getSingleAuthor(id).subscribe((data:any) => {
+  getAuthor() {
+    const id = String(this.route.snapshot.paramMap.get('authorId'));
+    this.authorService.getSingleAuthor(id).subscribe((data: any) => {
       this.author = data.data.author;
-    })
+      this.getAuthorBooks();
+    });
   }
 
+  getAuthorBooks() {
+    this.bookService.getAuthorBooks(this.author!._id).subscribe((data: any) => {
+      this.auhtorBooks = data.data.books;
+    });
+  }
 }
