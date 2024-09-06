@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="mainNav navbar navbar-expand-lg bg-body-tertiary">
   <div class="container">
     <a class="navbar-brand" href="#"
       ><i class="fa-solid fa-book-open me-2"></i>MEAM<span>BOOKSTORE</span></a
@@ -16,23 +16,49 @@
     </button>
     <div class="collapse navbar-collapse ms-5" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        @if (!user.isAdmin) {
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a
+            class="nav-link active"
+            aria-current="page"
+            href="#"
+            routerLink="/userProfile"
+            *ngIf="user.email"
+            >Home</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Categories</a>
+          <a class="nav-link" href="#" routerLink="/categories">Categories</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Books</a>
+          <a class="nav-link" href="#" routerLink="/books">Books</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Authors</a>
+          <a class="nav-link" href="#" routerLink="/authors">Authors</a>
         </li>
+        }
       </ul>
       <form class="d-flex justify-content-between" role="search">
-        <button *ngIf="!user.token" class="btn login ms-3" routerLink="/login">
-          Login
-        </button>
+        @if (!user.email) {
+        <button class="btn login ms-3" routerLink="/login">Login</button>
+        } @if (user.email && user.isAdmin) {
+        <div class="username" routerLink="/admin/books">
+          Admin
+          <div class="profile-picture">
+            <img
+              src="https://thumbs.dreamstime.com/b/red-admin-sign-pc-laptop-vector-illustration-administrator-icon-screen-controller-man-system-box-88756468.jpg"
+              alt="pp"
+            />
+          </div>
+        </div>
+        <button
+          class="btn btn-outline-danger"
+          (click)="logOut()"
+          routerLink="/admin"
+        >
+          Logout</button
+        >} @else if (user.email) {
+
         <div class="username" *ngIf="user.email" routerLink="/userProfile">
           {{ user.name }}
           <div class="profile-picture">
@@ -40,21 +66,22 @@
           </div>
         </div>
         <button
-          *ngIf="user.token"
           class="btn btn-outline-danger"
           (click)="logOut()"
           routerLink="/login"
         >
           Logout
         </button>
+        } @if (!user.isAdmin && !user.token) {
         <button
-          *ngIf="!user.token"
+          *ngIf="!user.email"
           class="btn signup ms-3"
           routerLink="/register"
           type="submit"
         >
           SignUp
         </button>
+        }
       </form>
     </div>
   </div>

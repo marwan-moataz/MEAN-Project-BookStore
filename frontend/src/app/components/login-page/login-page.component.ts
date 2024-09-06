@@ -19,7 +19,7 @@ import { NgIf } from '@angular/common';
 export class LoginPageComponent {
   loginForm!: FormGroup;
   isSubmitted = false;
-  returnUrl = '';
+  returnUrl = '/userProfile';
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserServicesService,
@@ -32,7 +32,8 @@ export class LoginPageComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
-    this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'];
+    this.returnUrl =
+      this.activatedRoute.snapshot.queryParams['returnUrl'] || this.returnUrl;
   }
 
   get fc() {
@@ -55,14 +56,4 @@ export class LoginPageComponent {
         error: () => {},
       });
   }
-
-  // this.userService;
-  // this.userService
-  // .login({
-  //   email: this.fc['email'].value,
-  //   password: this.fc['password'].value,
-  // })
-  // .subscribe(() => {
-  //   this.router.navigateByUrl(this.returnUrl);
-  // });
 }

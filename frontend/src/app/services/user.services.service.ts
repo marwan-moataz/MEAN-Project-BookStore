@@ -26,7 +26,7 @@ export class UserServicesService {
   }
 
   login(userLogin: IUserLogin): Observable<any> {
-    return this.http.post<any>('http://localhost:4000/login', userLogin).pipe(
+    return this.http.post<any>('http://localhost:3333/login', userLogin).pipe(
       tap({
         next: (user) => {
           this.setUserToLocalStorage(user);
@@ -43,32 +43,31 @@ export class UserServicesService {
       })
     );
   }
-  // updateBookStatus(bookId: string, newStatus: string): Observable<any> {
-  //   return this.http.patch(`http://localhost:4000/books/${bookId}/status`, {
-  //     shelve: newStatus,
-  //   });
-  // }
   updateBookStatus(
     bookId: string,
     newStatus: string,
     userId: string
   ): Observable<any> {
-    return this.http.patch(`http://localhost:4000/books/${userId}/status`, {
+    return this.http.patch(`http://localhost:3333/books/${userId}/status`, {
       shelve: newStatus,
       bookId,
     });
   }
 
+  getUser(userId: string): Observable<any> {
+    return this.http.get(`http://localhost:3333/user/${userId}`);
+  }
+
   getBooksByShelve(shelve: string): Observable<any> {
-    return this.http.get(`http://localhost:4000/books?shelve=${shelve}`);
+    return this.http.get(`http://localhost:3333/books?shelve=${shelve}`);
   }
   getSingleBooks(bookId: string): Observable<Book[]> {
-    return this.http.get<Book[]>('http://localhost:4000/books/' + bookId);
+    return this.http.get<Book[]>('http://localhost:3333/api/books/' + bookId);
   }
 
   register(formData: IUserRegister): Observable<User> {
     return this.http
-      .post<User>('http://localhost:4000/register', formData)
+      .post<User>('http://localhost:3333/register', formData)
       .pipe(
         tap({
           next: (user) => {
@@ -92,8 +91,9 @@ export class UserServicesService {
   }
 
   logOut() {
-    this.userSubject.next(new User());
     localStorage.removeItem(USER_KEY);
+    this.userSubject.next(new User());
+    localStorage.removeItem('userId');
   }
 
   private setUserToLocalStorage(user: User) {
@@ -114,26 +114,4 @@ export class UserServicesService {
     if (userJson) return JSON.parse(userJson) as User;
     return new User();
   }
-  // private userSubject = new BehaviorSubject<User>(new User());
-  // public userObservable: Observable<User>;
-  // constructor(private http: HttpClient, private toastrService: ToastrService) {
-  //   this.userObservable = this.userSubject.asObservable();
-  // }
-
-  // login(userLogin: IUserLogin): Observable<User> {
-  //   return this.http.post<User>(USER_LOGIN_URL, userLogin).pipe(
-  //     tap({
-  //       next: (user) => {
-  //         this.userSubject.next(user);
-  //         this.toastrService.success(
-  //           `welcome ${user.name}`,
-  //           `Login Successful`
-  //         );
-  //       },
-  //       error: (errorResponse) => {
-  //         this.toastrService.error(errorResponse.error, `Login`);
-  //       },
-  //     })
-  //   );
-  // }
 }
